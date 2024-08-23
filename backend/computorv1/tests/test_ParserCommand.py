@@ -17,4 +17,5 @@ class TestParsingChecker(unittest.TestCase):
 # if __name__ == "__main__":
 # 	unittest.main()
 
-# python -m unittest -v test_ParserCommand
+# python -m unittest -v tests/test_ParserCommand.py
+# python -m unittest -v tests/test*

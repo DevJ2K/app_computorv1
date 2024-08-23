@@ -7,7 +7,7 @@ from ErrorManager import ErrorManager
 
 def is_an_equation(polynomial: str) -> bool:
 	result = polynomial.split("=")
-	# print(result)
+	print(result)
 	return (
 		len(result) == 2
 		and len(result[0]) >= 1
