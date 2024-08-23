@@ -1,6 +1,12 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+import logging
+
+logging.basicConfig(level=logging.DEBUG,
+                    filename="api.log",
+                    filemode="w",
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 
