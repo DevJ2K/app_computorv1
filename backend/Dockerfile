@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY app.py ./
 COPY requirements.txt ./
-COPY project_name ./project_name
+COPY computorv1 ./computorv1
 
 RUN pip install -r requirements.txt
 

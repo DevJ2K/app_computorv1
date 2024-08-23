@@ -45,7 +45,7 @@ async def test_post(test: Test):
 # curl -s -H 'Content-Type: application/json' -d '{ "name":"foo"}' -X POST http://127.0.0.1:8000/test/ | jq
 
 if __name__ == "__main__":
-    from project_name.main import basic_function
+    from computorv1.main import basic_function
     import time
     basic_function();
     for i in range(1200):
