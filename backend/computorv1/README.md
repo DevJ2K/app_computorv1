@@ -5,7 +5,15 @@
 
 ## Description
 
-A brief description of the project goes here. Explain the purpose, goals, and key features of the project in a concise manner. This could be a tool, a script, or an application, and this section should provide enough context to understand its utility.
+Computorv1 is a project aimed at building a simple equation-solving program. The program will focus on solving polynomial equations of the second degree or lower, using only exponents. The goal is to display the solutions of these equations clearly.
+
+The program will handle the following tasks:
+
+- Display the equation in its reduced form.
+- Identify the degree of the equation.
+- Show the solution(s) and, if applicable, the nature of the discriminant (positive, negative, or zero).
+
+This project is a part of a series designed to refresh and strengthen mathematical skills, which will be useful for many future projects.
 
 ## Installation
 

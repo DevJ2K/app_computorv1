@@ -4,7 +4,7 @@
 
 ## Overview
 
-Welcome to my development template for running a Python project as a web application. This template combines a Python backend with a Vue.js frontend, providing a solid foundation to kickstart your projects.
+Computorv1 is a project aimed at building a simple equation-solving program. The program will focus on solving polynomial equations of the second degree or lower, using only exponents.
 
 ## Try the Project - WebApp
 
