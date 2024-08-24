@@ -13,6 +13,7 @@ class TestParsingChecker(unittest.TestCase):
 		self.assertEqual(is_an_equation("0 = 3 = 4"), False)
 		self.assertEqual(is_an_equation("3=4"), True)
 
+# "0.0 + 45*x^2 + 451*x = 0"
 # RUN TEST
 # if __name__ == "__main__":
 # 	unittest.main()

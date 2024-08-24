@@ -23,8 +23,10 @@ class Computor:
 		if (is_polynomial_form(polynomial) == False):
 			return False
 		split_polynomial = polynomial.split("=")
-		self.lhs = split_polynomial[0]
-		self.rhs = split_polynomial[1]
+		lhs_str = split_polynomial[0]
+		rhs_str = split_polynomial[1]
+
+		
 
 	def solve() -> str:
 		pass
