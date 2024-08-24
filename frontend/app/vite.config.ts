@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
   ],
   define: {
-    'downloadProject': JSON.stringify("https://download-directory.github.io/?url=https://github.com/DevJ2K/template_webapp/tree/main/backend/project_name")
+    'downloadProject': JSON.stringify("https://download-directory.github.io/?url=https://github.com/DevJ2K/template_webapp/tree/main/backend/computorv1")
   },
   resolve: {
     alias: {
