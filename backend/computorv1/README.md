@@ -1,6 +1,6 @@
-# Project Name
+# Computorv1
 
-![Python version](https://img.shields.io/badge/Python-3.9%2B-blue)
+![Python version](https://img.shields.io/badge/Python-3.10%2B-blue)
 <!-- ![License](https://img.shields.io/badge/License-MIT-green) -->
 
 ## Description
@@ -19,7 +19,7 @@ This project is a part of a series designed to refresh and strengthen mathematic
 
 ### Prerequisites
 
-Ensure you have Python 3.9 or newer installed. You can download the latest version of Python from the official [Python website](https://www.python.org/downloads/).
+Ensure you have Python 3.10 or newer installed. You can download the latest version of Python from the official [Python website](https://www.python.org/downloads/).
 
 ### Setup
 
