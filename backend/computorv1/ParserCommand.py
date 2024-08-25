@@ -8,7 +8,7 @@ from Monomial import Monomial
 
 def is_an_equation(polynomial: str) -> bool:
 	result = polynomial.split("=")
-	print(result)
+	# print(result)
 	return (
 		len(result) == 2
 		and len(result[0]) >= 1
@@ -23,7 +23,7 @@ def is_polynomial_form(polynomial: str) -> bool:
 	if (is_an_equation(polynomial) == False):
 		ErrorManager("Invalid polynomial format", 0, False)
 		return (False)
-
+	return (True)
 
 # 5 * X^0 + 4 * X^1 - 9.3 * X^2 => {
 # 5 * X^0
@@ -31,7 +31,16 @@ def is_polynomial_form(polynomial: str) -> bool:
 # - 9.3 * X^2
 # }
 #  1 * X^0
-def convertToMonomialList(side: str) -> list[Monomial]:
+
+
+
+def convertToMonomialList(monomial_str_list: list[str]) -> list[Monomial]:
+	monomial_list = []
+	for monomial_str in monomial_str_list:
+		monomial_list.append(Monomial(monomial_str))
+	return monomial_list
+
+def convertToMonomialStrList(side: str) -> list[str]:
 	previousSign = side[0] if side[0] == "-" else "+"
 	side = side.removeprefix("+")
 	side = side.removeprefix("-")
@@ -59,13 +68,16 @@ def convertToMonomialList(side: str) -> list[Monomial]:
 	print(str_monomial_list)
 	# print(str_monomial_list)
 	# print(side)
-	pass
+	return (str_monomial_list)
+
 
 if (__name__ == "__main__"):
-	convertToMonomialList("5 * X^0 + 4 * X^1 - 9.3 * X^2")
+	l1str = convertToMonomialStrList("5 * X^0 + 4 * X^1 - 9.3 * X^2")
+	l1 = convertToMonomialList(l1str)
+	print(l1)
 	# print("==================")
-	# convertToMonomialList("+ 4 * X^1 - 9.3 * X^2")
+	# convertToMonomialStrList("+ 4 * X^1 - 9.3 * X^2")
 	print("==================")
-	convertToMonomialList("+5 * X^0 + 4 * X^1 - 9.3 * X^2 - 3 * X^3")
-	print("==================")
-	convertToMonomialList("-5 * X^0 + 4 * X^1 - 9.3 * X^2")
+	# convertToMonomialStrList("+5 * X^0 + 4 * X^1 - 9.3 * X^2 - 3 * X^3")
+	# print("==================")
+	# convertToMonomialStrList("-5 * X^0 + 4 * X^1 - 9.3 * X^2")
