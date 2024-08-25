@@ -21,6 +21,7 @@ def is_an_equation(polynomial: str) -> bool:
 
 
 def is_polynomial_form(polynomial: str) -> bool:
+	# Use RegEx !
 	if (len(polynomial) < 3):
 		ErrorManager("Invalid polynomial format", 0, False)
 		return (False)
@@ -45,6 +46,7 @@ def convertToMonomialList(monomial_str_list: list[str]) -> list[Monomial]:
 	return monomial_list
 
 def convertToMonomialStrList(side: str) -> list[str]:
+	# Use RegEx !
 	previousSign = side[0] if side[0] == "-" else "+"
 	side = side.removeprefix("+")
 	side = side.removeprefix("-")
