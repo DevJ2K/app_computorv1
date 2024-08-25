@@ -25,8 +25,9 @@ class Computor:
 		split_polynomial = polynomial.split("=")
 		lhs_str = split_polynomial[0]
 		rhs_str = split_polynomial[1]
+		return True
 
-		
 
-	def solve() -> str:
-		pass
+
+	def solve(self) -> str:
+		return ""
