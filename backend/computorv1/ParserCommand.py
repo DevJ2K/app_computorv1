@@ -6,6 +6,10 @@
 from ErrorManager import ErrorManager
 from Monomial import Monomial
 
+# Use RegEx !
+# Use RegEx !
+# Use RegEx !
+# Use RegEx !
 def is_an_equation(polynomial: str) -> bool:
 	result = polynomial.split("=")
 	# print(result)
