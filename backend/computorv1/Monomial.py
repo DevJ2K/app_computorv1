@@ -10,7 +10,6 @@ class Monomial:
 		self.monomial: str = monomial
 		self.degree: int = 0
 		self.coefficient: float = 1
-		# self.sign: str = '+'
 
 		if self.__is_monomial_format():
 			self.__set_monomial_coefficient()
@@ -19,9 +18,7 @@ class Monomial:
 			raise MonomialError("Not a monomial format.")
 
 	def __str__(self) -> str:
-		print(self.monomial)
-		return f"{self.coefficient} * X^{self.degree}\n======================"
-		# return f"{self.monomial}\n============================"
+		return f"{self.coefficient} * X^{self.degree}"
 
 	def __repr__(self) -> str:
 		return self.__str__()
@@ -57,11 +54,8 @@ class Monomial:
 				coefficient = float(trim_match)
 				# print(f"{match.groups()} => {coefficient}")
 				self.coefficient = coefficient
-			except Exception as error:
+			except:
 				raise MonomialConvertError("Unable to convert the value to float.")
-				print(f"Error: {error}")
-		else:
-			print("No valid coefficient found")
 		return self.coefficient
 
 
@@ -73,15 +67,11 @@ class Monomial:
 			deg_str = match.groups("deg")[0]
 			if (deg_str == "deg"):
 				self.degree = 1
-				# print(f"DEGREES : {self.degree}")
 			else:
 				try:
 					self.degree = int(deg_str)
-					# print(f"DEGREES : {self.degree}")
 				except:
 					raise MonomialConvertError("Unable to convert the value to int.")
-		else:
-			print("No degree found")
 		return self.degree
 
 
