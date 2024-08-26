@@ -16,14 +16,6 @@ def is_an_equation(polynomial: str) -> bool:
 		return True
 	return False
 
-	result = polynomial.split("=")
-	# print(result)
-	return (
-		len(result) == 2
-		and len(result[0]) >= 1
-		and len(result[1]) >= 1
-		)
-
 
 def is_polynomial_form(polynomial: str) -> bool:
 	if (len(polynomial) < 3):
@@ -59,7 +51,10 @@ def convertToMonomialList(polynomial: str) -> list[Monomial]:
 	match = re.findall(regex, polynomial)
 	monomial_list = []
 	if match:
-		print(match)
+		rm_equal_polynomial = polynomial.replace('=', '')
+		rm_whitespace_polynomial = re.sub(r"\s", "", rm_equal_polynomial)
+		if len(rm_whitespace_polynomial) != len(re.sub(r"\s", "",''.join(match))):
+			raise InvalidPolynomialError
 		for monomial_str in match:
 			monomial = Monomial(monomial_str)
 			monomial_list.append(monomial)
@@ -68,6 +63,9 @@ def convertToMonomialList(polynomial: str) -> list[Monomial]:
 		raise InvalidPolynomialError
 
 if (__name__ == "__main__"):
+	print(convertToMonomialList("5 * X^0"))
+	# print(convertToMonomialList("5.00 * 	X^015	"))
+	# print(convertToMonomialList("5 * X^0 + 4 * X^1 - 9.3 * X^2"))
 	# is_an_equation("0 = 3 = 4")
 	# is_polynomial_form("5 * X^0")
 	# is_polynomial_form("5 * X^0 + 4 * X^1 - 9.3 * X^2 = 0")
