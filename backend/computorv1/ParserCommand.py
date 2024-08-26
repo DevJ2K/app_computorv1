@@ -3,7 +3,7 @@
 # - len 3 min
 # - 1 equal (=) avec 2 blocs et min 1 de len
 
-from ErrorManager import ErrorManager
+from ErrorManager import *
 from Monomial import Monomial
 import re
 
@@ -53,26 +53,19 @@ def is_polynomial_form(polynomial: str) -> bool:
 
 	return False
 
-# 5 * X^0 + 4 * X^1 - 9.3 * X^2 => {
-# 5 * X^0
-# + 4 * X^1
-# - 9.3 * X^2
-# }
-#  1 * X^0
 
-
-
-# def convertToMonomialList(monomial_str_list: list[str]) -> list[Monomial]:
-# 	monomial_list = []
-# 	for monomial_str in monomial_str_list:
-# 		monomial_list.append(Monomial(monomial_str))
-# 	return monomial_list
-
-def convertToMonomialList(monomial_str_list: list[str]) -> list[Monomial]:
-	pass
-
-def convertToMonomialStrList(side: str) -> list[str]:
-	pass
+def convertToMonomialList(polynomial: str) -> list[Monomial]:
+	regex = r"\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?))"
+	match = re.findall(regex, polynomial)
+	monomial_list = []
+	if match:
+		print(match)
+		for monomial_str in match:
+			monomial = Monomial(monomial_str)
+			monomial_list.append(monomial)
+		return monomial_list
+	else:
+		raise InvalidPolynomialError
 
 if (__name__ == "__main__"):
 	# is_an_equation("0 = 3 = 4")
