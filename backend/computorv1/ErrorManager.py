@@ -8,3 +8,12 @@ class ErrorManager:
 			print(f"An error has been detected about : {name}")
 		if (exitPrograms):
 			exit(exitCode)
+
+class InvalidPolynomialError(Exception):
+	pass
+
+class MonomialError(Exception):
+	pass
+
+class MonomialConvertError(Exception):
+	pass
