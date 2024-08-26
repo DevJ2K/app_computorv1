@@ -1,22 +1,17 @@
-import re
-
-class MonomialError(Exception):
-	pass
-
-class MonomialConvertError(Exception):
-	pass
-
 # https://docs.python.org/3/library/re.html
+import re
+from ErrorManager import *
+
+
 class Monomial:
 	"""Monomial class : Item in a polynomial"""
 
 	def __init__(self, monomial: str) -> None:
 		self.monomial: str = monomial
-		self.degree: int = 1
-		self.coefficient: float = 0
-		self.sign: str = '+'
+		self.degree: int = 0
+		self.coefficient: float = 1
+		# self.sign: str = '+'
 
-		print(f"'{monomial}'")
 		if self.__is_monomial_format():
 			self.__set_monomial_coefficient()
 			self.__set_monomial_degree()
@@ -24,8 +19,9 @@ class Monomial:
 			raise MonomialError("Not a monomial format.")
 
 	def __str__(self) -> str:
-		return '---------------------------------------------'
-		# return f"{self.sign}{self.coefficient} * X^{self.degree}"
+		print(self.monomial)
+		return f"{self.coefficient} * X^{self.degree}\n======================"
+		# return f"{self.monomial}\n============================"
 
 	def __repr__(self) -> str:
 		return self.__str__()
@@ -40,60 +36,70 @@ class Monomial:
 		return False
 
 	def __is_monomial_format(self) -> bool:
-		# regex = r"([-+ \t\d]+\d+)\s*\*(\s*[xX]+\^\d+)"
-		# match = re.match(regex, monomial)
-		# if match:
-		# 	print(f"{match.groups()}")
-		# else:
-		# 	print("Not a monomial")
+		monomial = self.monomial
+		regex = r"\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?))\s*$"
+		match = re.match(regex, monomial)
+		if match:
+			return True
+		return False
 
-		# Find the degree
-		# match = re.search(r"[xX]'^'$", monomial)
-		# if match:
-		# 	print(match.group())
-		# 	pass
-		# else:
-		# 	print("No sign found")
-		return True
 
 	def __set_monomial_coefficient(self) -> float:
 		monomial = self.monomial
 		# Regex groups with name
 		# regex = r"^(?P<group1>[\d+-]?\d*)"
 
-		# Find the coefficient
-		# regex = r"([-+ \t\d]+\d+)"
-		# regex = r"[ \t]*([-+]\d+|\d+)"
-		regex = r"(\s*[-+]?\s*\d+)"
+		regex = r"(\s*[-+]?\s*\d+(?:\.\d+)?)"
 		match = re.match(regex, monomial)
 		if match:
 			try:
-				print(f"{match.groups()} => {int(match.group())}")
-				pass
+				trim_match = re.sub(r'\s', '', match.group())
+				coefficient = float(trim_match)
+				# print(f"{match.groups()} => {coefficient}")
+				self.coefficient = coefficient
 			except Exception as error:
 				raise MonomialConvertError("Unable to convert the value to float.")
 				print(f"Error: {error}")
-				pass
 		else:
 			print("No valid coefficient found")
-		return 0.0
+		return self.coefficient
 
 
 	def __set_monomial_degree(self) -> int:
-		return 0
+		monomial = self.monomial
+		regex = r"\*\s*[xX](?:\^(?P<deg>\d+))?\s*$"
+		match = re.search(regex, monomial)
+		if match:
+			deg_str = match.groups("deg")[0]
+			if (deg_str == "deg"):
+				self.degree = 1
+				# print(f"DEGREES : {self.degree}")
+			else:
+				try:
+					self.degree = int(deg_str)
+					# print(f"DEGREES : {self.degree}")
+				except:
+					raise MonomialConvertError("Unable to convert the value to int.")
+		else:
+			print("No degree found")
+		return self.degree
 
 
 if __name__ == "__main__":
-	print(Monomial("+5 * X^0 "))
-	print(Monomial("+ * X^0 "))
-	print(Monomial("++5 * X^0 "))
-	print(Monomial(" +5 * X^0 "))
-	print(Monomial("+545 * X^0 "))
-	print(Monomial("+545* X^0 "))
+	# print(int("-    5"))
+	print(Monomial("+  5 * X^1 "))
+	# print(Monomial("+ * X^0 "))
+	# print(Monomial("++5 * X^0 "))
+	print(Monomial(" +5 * X^3 "))
+	print(Monomial(" +5.4 * X^4 "))
+	print(Monomial("+545 * X^12 "))
+	print(Monomial("+545* X^43 "))
 	print(Monomial("-5*X^0"))
-	print(Monomial("--5*X^0"))
+	# print(Monomial("--5*X^0"))
 	print(Monomial(" 5*X^0"))
-	print(Monomial(" a5*X^0"))
+	print(Monomial(" 5"))
+	print(Monomial(" 5 * X"))
+	# print(Monomial(" a5*X^0"))
 	# print(Monomial(" 5 * X^2 "))
 	# print(Monomial("+5 * X^20 "))
 	# print(Monomial("- 5 * X^2 "))
