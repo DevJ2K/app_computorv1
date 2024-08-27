@@ -33,7 +33,7 @@ class Monomial:
 
 	def __is_monomial_format(self) -> bool:
 		monomial = self.monomial
-		regex = r"\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?))\s*$"
+		regex = r"\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:(?:\*)?\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?))\s*$"
 		match = re.match(regex, monomial)
 		if match:
 			return True
