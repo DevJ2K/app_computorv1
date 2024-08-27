@@ -9,7 +9,7 @@ class Monomial:
 	def __init__(self, monomial: str) -> None:
 		self.monomial: str = monomial
 		self.degree: int = 0
-		self.coefficient: float = 1
+		self.coefficient: float = 0
 
 		if self.__is_monomial_format():
 			self.__set_monomial_coefficient()
@@ -56,12 +56,17 @@ class Monomial:
 				self.coefficient = coefficient
 			except:
 				raise MonomialConvertError("Unable to convert the value to float.")
+		else:
+			regex = r"(?:\*)?\s*[xX](?:\^(?P<deg>\d+))?\s*$"
+			match = re.search(regex, monomial)
+			if match:
+				self.coefficient = 1.0
 		return self.coefficient
 
 
 	def __set_monomial_degree(self) -> int:
 		monomial = self.monomial
-		regex = r"\*\s*[xX](?:\^(?P<deg>\d+))?\s*$"
+		regex = r"(?:\*)?\s*[xX](?:\^(?P<deg>\d+))?\s*$"
 		match = re.search(regex, monomial)
 		if match:
 			deg_str = match.groups("deg")[0]
