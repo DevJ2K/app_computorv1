@@ -26,9 +26,8 @@ class Monomial:
 	def __eq__(self, value: object) -> bool:
 		if isinstance(value, Monomial):
 			return (
-				self.sign == value.sign and
-                self.coefficient == value.coefficient and
-                self.degree == value.degree
+				self.coefficient == value.coefficient and
+				self.degree == value.degree
 			)
 		return False
 
