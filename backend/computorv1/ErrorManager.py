@@ -17,3 +17,6 @@ class MonomialError(Exception):
 
 class MonomialConvertError(Exception):
 	pass
+
+class UnsolvableEquationError(Exception):
+	pass
