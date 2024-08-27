@@ -10,7 +10,7 @@ def basic_function():
 if __name__ == "__main__":
 	if len(sys.argv) != 2:
 		ErrorManager("argc", 1)
-	polynomial = Computor("5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0")
-	print(polynomial._priv)
+	polynomial = Computor("5 * X^0 + 4 * X^1 - 9.3 * X^2 = x^2")
+	# print(polynomial._priv)
 	# print(polynomial._Computor__priv)
 	# print(polynomial)
