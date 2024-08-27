@@ -100,6 +100,11 @@ def test_invalid_convert_to_monomial_list_1_item():
 			_strMonomialList(monomial)
 
 
+def test_simplified_polynomial_side():
+	assert simplifiedPolynomialSide(convertToMonomialList("1 * X^2 + 2 * X^2 + 4 * X^1")) == convertToMonomialList("3 * X^2 + 4 * X^1")
+	assert simplifiedPolynomialSide(convertToMonomialList("1 * X^2 - 2 * X^2 - 2 * X^2  + 4 * X^1")) == convertToMonomialList("-3 * X^2 + 4 * X^1")
+	assert simplifiedPolynomialSide(convertToMonomialList("2 * X^2 - 2 * X^2 + 4 * X^1")) == convertToMonomialList("0 * X^2 + 4 * X^1")
+
 # def test_convert_to_list():
 # 	assert convertToMonomialStrList("5 * X^0 + 4 * X^1 - 9.3 * X^2") == ['5*X^0', '+4*X^1 ', '-9.3*X^2']
 # 	assert convertToMonomialStrList("	 5*X^0    +  	4*X^1-	 9.3*	 X^2") == ['5*X^0', '+4*X^1 ', '-9.3*X^2']

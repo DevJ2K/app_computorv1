@@ -62,8 +62,29 @@ def convertToMonomialList(polynomial: str) -> list[Monomial]:
 	else:
 		raise InvalidPolynomialError
 
+
+def simplifiedPolynomialSide(side: list[Monomial]) -> list[Monomial]:
+	existing_degree: list[int] = []
+	simplified_list: list[Monomial] = []
+	for monomial in side:
+		if monomial.degree not in existing_degree:
+			existing_degree.append(monomial.degree)
+
+	for degree in existing_degree:
+		coefficient = 0
+		for monomial in side:
+			if monomial.degree == degree:
+				coefficient += monomial.coefficient
+		simplified_list.append(Monomial(f"{coefficient} * X^{degree}"))
+
+	print(simplified_list)
+	return simplified_list
+
 if (__name__ == "__main__"):
-	print(convertToMonomialList("5 * X^0"))
+	# print(convertToMonomialList("5 * X^0"))
+	temp_list = convertToMonomialList("2 * X^2 - 2 * X^2 + 4 * X^1")
+	print(temp_list)
+	print(simplifiedPolynomialSide(temp_list))
 	# print(convertToMonomialList("5.00 * 	X^015	"))
 	# print(convertToMonomialList("5 * X^0 + 4 * X^1 - 9.3 * X^2"))
 	# is_an_equation("0 = 3 = 4")
