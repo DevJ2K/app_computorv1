@@ -1,6 +1,7 @@
 # https://docs.python.org/3/library/re.html
 import re
 from ErrorManager import *
+from MyRegex import MyRegex
 
 
 class Monomial:
@@ -33,7 +34,7 @@ class Monomial:
 
 	def __is_monomial_format(self) -> bool:
 		monomial = self.monomial
-		regex = r"\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:(?:\*)?\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?))\s*$"
+		regex = fr"{MyRegex['monomial']}\s*$"
 		match = re.match(regex, monomial)
 		if match:
 			return True
@@ -45,7 +46,7 @@ class Monomial:
 		# Regex groups with name
 		# regex = r"^(?P<group1>[\d+-]?\d*)"
 
-		regex = r"(\s*[-+]?\s*\d+(?:\.\d+)?)"
+		regex = MyRegex['monomial_coefficient']
 		match = re.match(regex, monomial)
 		if match:
 			try:
@@ -56,7 +57,7 @@ class Monomial:
 			except:
 				raise MonomialConvertError("Unable to convert the value to float.")
 		else:
-			regex = r"(?:\*)?\s*[xX](?:\^(?P<deg>\d+))?\s*$"
+			regex = MyRegex['monomial_degree']
 			match = re.search(regex, monomial)
 			if match:
 				self.coefficient = 1.0
@@ -65,7 +66,7 @@ class Monomial:
 
 	def __set_monomial_degree(self) -> int:
 		monomial = self.monomial
-		regex = r"(?:\*)?\s*[xX](?:\^(?P<deg>\d+))?\s*$"
+		regex = MyRegex['monomial_degree']
 		match = re.search(regex, monomial)
 		if match:
 			deg_str = match.groups("deg")[0]
