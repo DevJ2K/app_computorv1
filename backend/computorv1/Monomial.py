@@ -50,7 +50,6 @@ class Monomial:
 
 		regex = MyRegex['monomial_coefficient']
 		match = re.match(regex, monomial)
-		print(match)
 		if match:
 			try:
 				trim_match = re.sub(r'\s', '', match.group())
@@ -59,7 +58,6 @@ class Monomial:
 				# print(f"{match.groups()} => {coefficient}")
 				self.coefficient = coefficient
 			except:
-				print(trim_match)
 				if trim_match == "-":
 					self.coefficient = -1.0
 				elif trim_match == "+":
