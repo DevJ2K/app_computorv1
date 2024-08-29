@@ -22,7 +22,7 @@ class Computor:
 	def __str__(self) -> str:
 		return (f"Polynomial => {BBLACK}{self.polynomial}")
 
-	def __eq__(self, value: object) -> bool:   
+	def __eq__(self, value: object) -> bool:
 		if isinstance(value, Computor):
 			return (
 				self.lhs == value.lhs and
@@ -122,6 +122,14 @@ class Computor:
 		return True
 
 
+	def get_polynomial_degree(self) -> int:
+		max_degree = 0
+		if self.lhs == [] and self.rhs == []:
+			return max_degree
+		for monomial in self.lhs:
+			if monomial.degree > max_degree:
+				max_degree = monomial.degree
+		return max_degree
 
 	def solve(self) -> str:
 		return ""
@@ -129,8 +137,13 @@ class Computor:
 if __name__ == "__main__":
 	# Computor("3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2  = 1 X^1")
 	# Computor("3 * X^3 -5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1   X^1 + 1 X^1")
-	Computor("X^3 + X^2 - X^1 = 0")
 	# Computor("42 * X^2 = 42 * X^2")
 	# Computor("5X^2 + 3X^1 + 2 = 5X^2 + 3X^1 + 2")
 	# Computor("3 * X^3 -5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1   X^1 - 1 X^1")
 	# Computor("1 X^1 = 3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2")
+	try:
+		# computor = Computor("X^3 + X^2 - X^1 - X^0 = 0")
+		computor = Computor("5 * X^0 + 4 * X^1 = 4 * X^0")
+		print(f"Polynomial degree: {computor.get_polynomial_degree()}")
+	except Exception as error:
+		print(f"Error: {error}")
