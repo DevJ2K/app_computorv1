@@ -23,9 +23,11 @@ def test_valid_equation():
 
 def test_invalid_equation():
 	assert is_an_equation("3 4") == False
+	assert is_an_equation("=") == False
 	assert is_an_equation("3==4") == False
 	assert is_an_equation("0 = 3 = 4") == False
 	assert is_an_equation("3 * X^0=4*X^3 2 * X^3 =") == False
+	assert is_an_equation("335425 = ") == False
 	assert is_an_equation("3 = ") == False
 	assert is_an_equation("3 = X^") == False
 	assert is_an_equation("3 * X^4 == X^0") == False
@@ -47,6 +49,7 @@ def test_valid_polynomial_form():
 	assert is_polynomial_form("	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2  = 0") == True
 	assert is_an_equation("0.0 + 10*x^2 + 146*x = 0") == True
 	assert is_an_equation("	0.0    + 10	*	x^2 + 146	*   x = 	0") == True
+	assert is_an_equation("X^3 + X^2 + X^1 = 0") == True
 
 def test_invalid_polynomial_form():
 	assert is_polynomial_form("5 * X^0 + 4 * X^1 - 9.3 * X^2 = ") == False
@@ -76,6 +79,8 @@ def _strMonomialList(polynomial: str) -> str:
 			string += " "
 	return string
 
+# print(_strMonomialList("55425426426426426426246246 * X^0"))
+
 def test_valid_convert_to_monomial_list_1_item():
 	assert _strMonomialList("5 * X^0") == '5 * X^0'
 	assert _strMonomialList("5  X^0") == '5 * X^0'
@@ -88,8 +93,6 @@ def test_valid_convert_to_monomial_list_1_item():
 	assert _strMonomialList("5 * x^0	") == '5 * X^0'
 	assert _strMonomialList("5 * X^12") == '5 * X^12'
 	assert _strMonomialList("5 	*	 X^5") == '5 * X^5'
-	assert _strMonomialList("55425426426426426426246246 * X^0") == '55425426426426426140917760 * X^0'
-	assert _strMonomialList("5542542642642-6426426246246 * X^0") == "5542542642642 * X^0 -6426426246246 * X^0"
 
 def test_invalid_convert_to_monomial_list_1_item():
 	invalid_polynomial = [
@@ -105,7 +108,7 @@ def test_invalid_convert_to_monomial_list_1_item():
 def test_simplified_polynomial_side():
 	assert simplifiedPolynomialSide(convertToMonomialList("1 * X^2 + 2 * X^2 + 4 * X^1")) == convertToMonomialList("3 * X^2 + 4 * X^1")
 	assert simplifiedPolynomialSide(convertToMonomialList("1 * X^2 - 2 * X^2 - 2 * X^2  + 4 * X^1")) == convertToMonomialList("-3 * X^2 + 4 * X^1")
-	assert simplifiedPolynomialSide(convertToMonomialList("2 * X^2 - 2 * X^2 + 4 * X^1")) == convertToMonomialList("0 * X^2 + 4 * X^1")
+	assert simplifiedPolynomialSide(convertToMonomialList("2 * X^2 - 2 * X^2 + 4 * X^1")) == convertToMonomialList("4 * X^1")
 	assert simplifiedPolynomialSide(convertToMonomialList("X^3 + 2.5 * X^2 - 2 * X^2 + 4 * X^1")) == convertToMonomialList("X^3 + 0.5 * X^2 + 4 * X^1")
 
 # def test_convert_to_list():

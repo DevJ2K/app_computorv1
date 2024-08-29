@@ -6,31 +6,16 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Monomial import Monomial, MonomialError, MonomialConvertError
 
 def test_valid_monomial_format():
-		# Monomial("+ 5 * X^0 ")
+		assert Monomial("X^0")._Monomial__set_monomial_coefficient() == 1
+		assert Monomial("X^0")._Monomial__set_monomial_degree() == 0
+
 		pass
 
 
-def _test_invalid_monomial_format():
+def test_invalid_monomial_format():
 	invalid_monomials = [
 		"++5 * X^0",
-		"--5*X^0"
-	]
-	for monomial in invalid_monomials:
-		with pytest.raises(MonomialError):
-			Monomial(monomial)
-
-
-def test_valid_convert_coefficient():
-	assert Monomial("+5 * X^0 ")._Monomial__set_monomial_coefficient() == 5 # type: ignore
-	assert Monomial(" +5 * X^0 ")._Monomial__set_monomial_coefficient() == 5 #type: ignore
-	assert Monomial("+545 * X^0 ")._Monomial__set_monomial_coefficient() == 545 #type: ignore
-	assert Monomial("+545* X^0 ")._Monomial__set_monomial_coefficient() == 545 #type: ignore
-	assert Monomial("-5*X^0")._Monomial__set_monomial_coefficient() == -5 #type: ignore
-	assert Monomial(" 5*X^0")._Monomial__set_monomial_coefficient() == 5 #type: ignore
-	assert Monomial(" 55.654*X^0")._Monomial__set_monomial_coefficient() == 55.654 #type: ignore
-
-def test_invalid_convert_coefficient():
-	invalid_monomials = [
+		"--5*X^0",
 		"+-5 * X^0",
 		"+5+ * X^0",
 		"+	-5 * X^0",
@@ -40,7 +25,33 @@ def test_invalid_convert_coefficient():
 	]
 	for monomial in invalid_monomials:
 		with pytest.raises(MonomialError):
+			print(monomial)
 			Monomial(monomial)
+
+
+def test_valid_convert_coefficient():
+	assert Monomial("-X^2 ")._Monomial__set_monomial_coefficient() == -1 # type: ignore
+	assert Monomial("+5 * X^0 ")._Monomial__set_monomial_coefficient() == 5 # type: ignore
+	assert Monomial(" +5 * X^0 ")._Monomial__set_monomial_coefficient() == 5 #type: ignore
+	assert Monomial("+545 * X^0 ")._Monomial__set_monomial_coefficient() == 545 #type: ignore
+	assert Monomial("+545* X^0 ")._Monomial__set_monomial_coefficient() == 545 #type: ignore
+	assert Monomial("-5*X^0")._Monomial__set_monomial_coefficient() == -5 #type: ignore
+	assert Monomial(" 5*X^0")._Monomial__set_monomial_coefficient() == 5 #type: ignore
+	assert Monomial(" 55.654*X^0")._Monomial__set_monomial_coefficient() == 55.654 #type: ignore
+
+# def test_invalid_convert_coefficient():
+# 	invalid_monomials = [
+# 		"+-5 * X^0",
+# 		"+5+ * X^0",
+# 		"+	-5 * X^0",
+# 		"-  * X^0",
+# 		"999..9 * X^0",
+# 		"999.4.9 * X^0",
+# 	]
+# 	for monomial in invalid_monomials:
+# 		with pytest.raises(MonomialError):
+# 			print(monomial)
+# 			Monomial(monomial)
 
 def test_valid_convert_degree():
 	assert Monomial("+5 * X^14 ")._Monomial__set_monomial_degree() == 14 # type: ignore
