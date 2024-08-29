@@ -2,12 +2,14 @@ from Colors import *
 from ParserCommand import is_polynomial_form, convertToMonomialList, simplifiedPolynomialSide
 from Monomial import Monomial
 from ErrorManager import *
+import re
 
 class Computor:
 	"""Computor class : To manipulate polynomial second or lower degree equation."""
 
 	def __init__(self, polynomial: str) -> None:
 		self.polynomial: str = polynomial
+		# self.polynomial: str = re.sub(r"\s*", "", polynomial)
 		self.reduced_from: str | None = None
 
 		self.lhs: list[Monomial] | None = None
@@ -19,6 +21,14 @@ class Computor:
 
 	def __str__(self) -> str:
 		return (f"Polynomial => {BBLACK}{self.polynomial}")
+
+	def __eq__(self, value: object) -> bool:   
+		if isinstance(value, Computor):
+			return (
+				self.lhs == value.lhs and
+				self.rhs == value.rhs
+			)
+		return False
 
 	def display_side(self, side: str) -> str:
 		select_side: list[Monomial] = None
@@ -49,6 +59,7 @@ class Computor:
 			message = "0"
 		message = " ".join(message.split())
 		message = message.removeprefix("+")
+		message = message.removeprefix(" ")
 		return message
 
 	def display_polynomial(self, message: str = ""):
@@ -92,7 +103,14 @@ class Computor:
 
 		for monomial_right in self.rhs:
 			if monomial_right.coefficient != 0:
-				self.
+				monomial_right.coefficient = -monomial_right.coefficient
+				# print(monomial_right)
+				self.lhs.append(monomial_right)
+
+
+		self.rhs.clear()
+		self.lhs = simplifiedPolynomialSide(self.lhs)
+		self.display_polynomial()
 
 		for monomial_left in self.lhs:
 			for monomial_right in self.rhs:
@@ -110,5 +128,9 @@ class Computor:
 
 if __name__ == "__main__":
 	# Computor("3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2  = 1 X^1")
-	Computor("3 * X^3 -5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1   X^1 + 1 X^1")
+	# Computor("3 * X^3 -5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1   X^1 + 1 X^1")
+	Computor("X^3 + X^2 - X^1 = 0")
+	# Computor("42 * X^2 = 42 * X^2")
+	# Computor("5X^2 + 3X^1 + 2 = 5X^2 + 3X^1 + 2")
+	# Computor("3 * X^3 -5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1   X^1 - 1 X^1")
 	# Computor("1 X^1 = 3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2")
