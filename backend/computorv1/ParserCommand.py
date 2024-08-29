@@ -5,12 +5,13 @@
 
 from ErrorManager import *
 from Monomial import Monomial
+from MyRegex import MyRegex
 import re
 
 def is_an_equation(polynomial: str) -> bool:
-	side_regex = r"(\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?)))+"
-	regex = side_regex + r"\s*=\s*" + side_regex + "$"
-
+	# polynomial = re.sub(r"\s*", "", polynomial)
+	side_regex = MyRegex['side']
+	regex = side_regex + r"\s*=\s*" + side_regex + r"$"
 	match = re.match(regex, polynomial)
 	if match:
 		return True
@@ -24,7 +25,8 @@ def is_polynomial_form(polynomial: str) -> bool:
 		return False
 
 	# regex = r"(\s*[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*X\^\d+)?)"
-	regex = r"\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?))"
+	regex = MyRegex['monomial']
+	# polynomial = re.sub(r"\s*", "", polynomial)
 	match = re.findall(regex, polynomial)
 	if match:
 		rm_equal_polynomial = polynomial.replace('=', '')
@@ -47,7 +49,8 @@ def is_polynomial_form(polynomial: str) -> bool:
 
 
 def convertToMonomialList(polynomial: str) -> list[Monomial]:
-	regex = r"\s*(?:(?:[-+]?\s*\d+(?:\.\d+)?\s*(?:(?:\*)?\s*[xX](?:\^\d+)?)?)|(?:[xX](?:\^\d+)?))"
+	regex = MyRegex['monomial']
+	# polynomial = re.sub(r"\s*", "", polynomial)
 	match = re.findall(regex, polynomial)
 	monomial_list = []
 	if match:
@@ -76,14 +79,16 @@ def simplifiedPolynomialSide(side: list[Monomial]) -> list[Monomial]:
 		for monomial in side:
 			if monomial.degree == degree:
 				coefficient += monomial.coefficient
-		simplified_list.append(Monomial(f"{coefficient} * X^{degree}"))
+		if coefficient != 0:
+			simplified_list.append(Monomial(f"{coefficient} * X^{degree}"))
 
 	# print(simplified_list)
 	return simplified_list
 
 
 if (__name__ == "__main__"):
-	print(convertToMonomialList("5 X^0"))
+	# print(convertToMonomialList("5 X^0"))
+	print(is_polynomial_form("X^3 + X^2 - X^1 = x^3"))
 	# temp_list = convertToMonomialList("2 * X^2 - 2 * X^2 - 2 * X^2 + 4 * X^1 + 4 * X^1")
 	# print(temp_list)
 	# print(simplifiedPolynomialSide(temp_list))
