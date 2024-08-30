@@ -1,7 +1,8 @@
 from Colors import *
-from ParserCommand import is_polynomial_form, convertToMonomialList, simplifiedPolynomialSide
+from parser import is_polynomial_form, convertToMonomialList, simplifiedPolynomialSide
 from Monomial import Monomial
 from ErrorManager import *
+from equation_solver import solve_polynomial_deg_0, solve_polynomial_deg_1, solve_polynomial_deg_2
 import re
 
 class Computor:
@@ -14,6 +15,8 @@ class Computor:
 
 		self.lhs: list[Monomial] | None = None
 		self.rhs: list[Monomial] | None = None
+
+		self.solution: dict | None = None
 
 		self.__initEquation()
 		self.__reducePolynomial()
@@ -71,7 +74,7 @@ class Computor:
 
 	def __initEquation(self) -> None:
 		if (is_polynomial_form(self.polynomial) == False):
-			raise InvalidPolynomialError
+			raise InvalidPolynomialError("")
 		split_polynomial = self.polynomial.split("=")
 
 		self.lhs = convertToMonomialList(split_polynomial[0])
@@ -99,7 +102,7 @@ class Computor:
 
 		# Print : Simplified expressions
 		# print(self.lhs)
-		self.display_polynomial()
+		# self.display_polynomial()
 
 		for monomial_right in self.rhs:
 			if monomial_right.coefficient != 0:
@@ -110,7 +113,7 @@ class Computor:
 
 		self.rhs.clear()
 		self.lhs = simplifiedPolynomialSide(self.lhs)
-		self.display_polynomial()
+		# self.display_polynomial()
 
 		for monomial_left in self.lhs:
 			for monomial_right in self.rhs:
@@ -131,7 +134,31 @@ class Computor:
 				max_degree = monomial.degree
 		return max_degree
 
+	def get_solution(self) -> dict:
+		if self.solution is None:
+			print("Please solve the equation before try to get solution.")
+			return {}
+		return self.solution
+
+	def display_solution(self) -> None:
+		if self.solution is None:
+			print("Please solve the equation before try to get solution.")
+
+
 	def solve(self) -> str:
+		polynomial_degree = self.get_polynomial_degree()
+		if polynomial_degree == 0:
+			self.solution = solve_polynomial_deg_0(self.lhs, self.rhs)
+		elif polynomial_degree == 1:
+			self.solution = solve_polynomial_deg_1(self.lhs, self.rhs)
+		elif polynomial_degree == 2:
+			self.solution = solve_polynomial_deg_2(self.lhs, self.rhs)
+		else:
+			self.solution = {
+			"has_solution": None,
+			"degree": polynomial_degree,
+			}
+			return "The polynomial degree is strictly greater than 2, I can't solve."
 		return ""
 
 if __name__ == "__main__":
@@ -145,5 +172,8 @@ if __name__ == "__main__":
 		# computor = Computor("X^3 + X^2 - X^1 - X^0 = 0")
 		computor = Computor("5 * X^0 + 4 * X^1 = 4 * X^0")
 		print(f"Polynomial degree: {computor.get_polynomial_degree()}")
+		# computor.get_solution()
+		computor.solve()
+		print(computor.get_solution())
 	except Exception as error:
 		print(f"Error: {error}")
