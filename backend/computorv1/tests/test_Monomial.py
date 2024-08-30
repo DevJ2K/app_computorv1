@@ -15,6 +15,8 @@ def test_valid_monomial_format():
 def test_invalid_monomial_format():
 	invalid_monomials = [
 		"++5 * X^0",
+		"+5 * X^-0",
+		"+5 * X^-13",
 		"--5*X^0",
 		"+-5 * X^0",
 		"+5+ * X^0",
