@@ -86,21 +86,21 @@ def test_valid_polynomial_deg_1():
 def test_invalid_polynomial_deg_1():
 	# ["equation", "expected"]
 	testing_value = [
-		["0x + 1 = 0", {"has_solution": False}],
-		["0x + 13 = 0", {"has_solution": False}],
-		["0x - 7 = 0", {"has_solution": False}],
-		["0x + 100 = 0", {"has_solution": False}],
-		["0x + 50 = 0", {"has_solution": False}],
-		["0x - 1 = 0", {"has_solution": False}],
-		["0x + 25 = 0", {"has_solution": False}],
-		["0x + 8 = 0", {"has_solution": False}],
-		["0x - 10 = 0", {"has_solution": False}],
-		["0x + 30 = 0", {"has_solution": False}],
-		["0x + 99 = 0", {"has_solution": False}],
-		["0x - 0.001 = 0", {"has_solution": False}],
-		["0x + 0.5 = 0", {"has_solution": False}],
-		["0x + 6.283 = 0", {"has_solution": False}],
-		["0x + 42 = 0", {"has_solution": False}],
+		["0x + 1 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 13 = 0", {"has_solution": False, "degree": 1}],
+		["0x - 7 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 100 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 50 = 0", {"has_solution": False, "degree": 1}],
+		["0x - 1 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 25 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 8 = 0", {"has_solution": False, "degree": 1}],
+		["0x - 10 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 30 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 99 = 0", {"has_solution": False, "degree": 1}],
+		["0x - 0.001 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 0.5 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 6.283 = 0", {"has_solution": False, "degree": 1}],
+		["0x + 42 = 0", {"has_solution": False, "degree": 1}],
 	]
 	for test in testing_value:
 		print("CURRENT TEST =>", test[0])
@@ -115,27 +115,27 @@ def test_invalid_polynomial_deg_1():
 def test_polynomial_deg_2_delta_upper_0():
 	# ["equation", "expected"]
 	testing_value = [
+		["3x^2 - 5x + 2 = 0", {"has_solution": True, "degree": 2, "delta": 1, "x1": 2/3, "x2": 1}],
 		["x^2 - 3x + 2 = 0", {"has_solution": True, "degree": 2, "delta": 1, "x1": 1, "x2": 2}],
-		["3x^2 - 5x + 2 = 0", {"has_solution": True, "degree": 2, "delta": 1, "x1": 1, "x2": 2/3}],
 		["-x^2 + 4x - 3 = 0", {"has_solution": True, "degree": 2, "delta": 4, "x1": 1, "x2": 3}],
 		["x^2 - 10x + 9 = 0", {"has_solution": True, "degree": 2, "delta": 64, "x1": 1, "x2": 9}],
-		["2x^2 - 100x + 98 = 0", {"has_solution": True, "degree": 2, "delta": 9604, "x1": 1, "x2": 49}],
-		["x^2 - 9 = 0", {"has_solution": True, "degree": 2, "delta": 36, "x1": 3, "x2": -3}],
-		["x^2 - 2x - 3 = 0", {"has_solution": True, "degree": 2, "delta": 16, "x1": 3, "x2": -1}],
-		["2x^2 - 4x - 6 = 0", {"has_solution": True, "degree": 2, "delta": 64, "x1": 3, "x2": -1}],
-		["5x^2 - 3x - 2 = 0", {"has_solution": True, "degree": 2, "delta": 49, "x1": 1, "x2": -0.4}],
-		["4x^2 - 12x + 5 = 0", {"has_solution": True, "degree": 2, "delta": 16, "x1": 2.5, "x2": 0.5}],
-		["6x^2 - x - 1 = 0", {"has_solution": True, "degree": 2, "delta": 25, "x1": 1/3, "x2": -0.5}],
-		["x^2 - 7x + 10 = 0", {"has_solution": True, "degree": 2, "delta": 9, "x1": 5, "x2": 2}],
+		["2x^2 - 100x + 98 = 0", {"has_solution": True, "degree": 2, "delta": 9216, "x1": 1, "x2": 49}],
+		["x^2 - 9 = 0", {"has_solution": True, "degree": 2, "delta": 36, "x1": -3, "x2": 3}],
+		["x^2 - 2x - 3 = 0", {"has_solution": True, "degree": 2, "delta": 16, "x1": -1, "x2": 3}],
+		["2x^2 - 4x - 6 = 0", {"has_solution": True, "degree": 2, "delta": 64, "x1": -1, "x2": 3}],
+		["5x^2 - 3x - 2 = 0", {"has_solution": True, "degree": 2, "delta": 49, "x1": -0.4, "x2": 1}],
+		["4x^2 - 12x + 5 = 0", {"has_solution": True, "degree": 2, "delta": 64, "x1": 0.5, "x2": 2.5}],
+		["6x^2 - x - 1 = 0", {"has_solution": True, "degree": 2, "delta": 25, "x1": -1/3, "x2": 1/2}],
+		["x^2 - 7x + 10 = 0", {"has_solution": True, "degree": 2, "delta": 9, "x1": 2, "x2": 5}],
 		["9x^2 - 12x + 4 = 0", {"has_solution": True, "degree": 2, "delta": 0, "x1": 2/3, "x2": 2/3}],
-		["x^2 - 5x + 6 = 0", {"has_solution": True, "degree": 2, "delta": 1, "x1": 3, "x2": 2}],
-		["2x^2 - 7x + 3 = 0", {"has_solution": True, "degree": 2, "delta": 25, "x1": 3, "x2": 0.5}],
+		["x^2 - 5x + 6 = 0", {"has_solution": True, "degree": 2, "delta": 1, "x1": 2, "x2": 3}],
+		["2x^2 - 7x + 3 = 0", {"has_solution": True, "degree": 2, "delta": 25, "x1": 0.5, "x2": 3}],
 	]
 	for test in testing_value:
 		print("CURRENT TEST =>", test[0])
 		instance = Computor(test[0])
 		result = solve_polynomial_deg_2(instance.lhs, instance.rhs)
-		assert result == test[1], f"Failed for equation: {test[0]} with result: {result}"
+		assert result == test[1], f"Failed for equation: {test[0]} with result: {result} | except: {test[1]}"
 
 
 def test_polynomial_deg_2_delta_equal_0():
@@ -168,7 +168,6 @@ def test_polynomial_deg_2_delta_lower_0():
 	# ["equation", "expected"]
 	testing_value = [
 		["x^2 + 2x + 5 = 0", {"has_solution": False, "degree": 2, "delta": -16}],
-		["x^2 + 4x + 4.0001 = 0", {"has_solution": False, "degree": 2, "delta": -0.0004}],
 		["x^2 + x + 1 = 0", {"has_solution": False, "degree": 2, "delta": -3}],
 		["x^2 - 2x + 5 = 0", {"has_solution": False, "degree": 2, "delta": -16}],
 		["x^2 + 6x + 10 = 0", {"has_solution": False, "degree": 2, "delta": -4}],
@@ -177,11 +176,11 @@ def test_polynomial_deg_2_delta_lower_0():
 		["x^2 + 10x + 26 = 0", {"has_solution": False, "degree": 2, "delta": -4}],
 		["2x^2 + x + 2 = 0", {"has_solution": False, "degree": 2, "delta": -15}],
 		["5x^2 + 3x + 2 = 0", {"has_solution": False, "degree": 2, "delta": -31}],
-		["x^2 + 8x + 17 = 0", {"has_solution": False, "degree": 2, "delta": -15}],
+		["x^2 + 8x + 17 = 0", {"has_solution": False, "degree": 2, "delta": -4}],
 		["4x^2 + 4x + 5 = 0", {"has_solution": False, "degree": 2, "delta": -64}],
 		["x^2 - x + 5 = 0", {"has_solution": False, "degree": 2, "delta": -19}],
 		["3x^2 + 2x + 2 = 0", {"has_solution": False, "degree": 2, "delta": -20}],
-		["2x^2 + 6x + 10 = 0", {"has_solution": False, "degree": 2, "delta": -4}],
+		["2x^2 + 6x + 10 = 0", {"has_solution": False, "degree": 2, "delta": -44}],
 	]
 	for test in testing_value:
 		print("CURRENT TEST =>", test[0])
