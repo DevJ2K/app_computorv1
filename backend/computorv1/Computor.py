@@ -143,6 +143,15 @@ class Computor:
 	def display_solution(self) -> None:
 		if self.solution is None:
 			print("Please solve the equation before try to get solution.")
+		solution_degree = self.solution['degree']
+		if solution_degree == 0:
+			pass
+		elif solution_degree == 1:
+			pass
+		elif solution_degree == 2:
+			pass
+		else:
+			pass
 
 
 	def solve(self) -> str:

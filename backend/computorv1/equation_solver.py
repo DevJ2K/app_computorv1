@@ -50,7 +50,7 @@ def solve_polynomial_deg_2(lhs: list[Monomial], rhs: list[Monomial]) -> dict:
 	var_delta = var_b ** 2 - 4 * var_a * var_c
 	int_delta = int(var_delta)
 	var_delta = int_delta if int_delta == var_delta else var_delta
-	print(f"a:{var_a} | b:{var_b} | c:{var_c} | delta:{var_delta}")
+	# print(f"a:{var_a} | b:{var_b} | c:{var_c} | delta:{var_delta}")
 	if var_delta < 0:
 		return {
 			"has_solution": False,

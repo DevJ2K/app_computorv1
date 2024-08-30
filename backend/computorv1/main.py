@@ -18,7 +18,7 @@ if __name__ == "__main__":
 		try:
 			polynomial = Computor(sys.argv[1])
 			polynomial.solve()
-			print(polynomial.display_solution())
+			polynomial.display_solution()
 		except InvalidPolynomialError:
 			print_error("The provided polynomial is invalid. Please check the format and try again.")
 		except MonomialError:
