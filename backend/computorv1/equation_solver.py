@@ -64,8 +64,6 @@ def solve_polynomial_deg_2(lhs: list[Monomial], rhs: list[Monomial]) -> dict:
 	x1 = int_x1 if int_x1 == x1 else x1
 	x2 = int_x2 if int_x2 == x2 else x2
 
-	print(x1)
-	print(x2)
 	if var_a < 0:
 		x1, x2 = x2, x1
 	return {

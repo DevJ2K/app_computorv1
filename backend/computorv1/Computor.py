@@ -5,6 +5,10 @@ from ErrorManager import *
 from equation_solver import solve_polynomial_deg_0, solve_polynomial_deg_1, solve_polynomial_deg_2
 import re
 
+def display_status(title: str, message: str, title_color: str = BHCYAN, message_color: str = BHWHITE):
+	print(f"{title_color}{title.ljust(30)}|{message_color} {message}{RESET}")
+	print(33 * "=")
+
 class Computor:
 	"""Computor class : To manipulate polynomial second or lower degree equation."""
 
@@ -18,8 +22,10 @@ class Computor:
 
 		self.solution: dict | None = None
 
+		display_status("Input", polynomial, BHYELLOW, BHWHITE)
 		self.__initEquation()
 		self.__reducePolynomial()
+		self.__solve()
 
 
 	def __str__(self) -> str:
@@ -33,7 +39,7 @@ class Computor:
 			)
 		return False
 
-	def display_side(self, side: str) -> str:
+	def display_side(self, side: str, simplified_read: bool = False) -> str:
 		select_side: list[Monomial] = None
 		if side == "left":
 			select_side = self.lhs
@@ -44,7 +50,7 @@ class Computor:
 
 		message: str = ""
 
-		for item in select_side:
+		for item in select_side: # "0x + 1 = 0"
 			if item.coefficient < 0:
 				message += " - "
 			elif item.coefficient > 0:
@@ -53,10 +59,28 @@ class Computor:
 				continue
 			abs_coef = abs(item.coefficient)
 			convert_to_int = int(abs_coef)
-			if convert_to_int == abs_coef:
-				message += f" {convert_to_int} * X^{item.degree} "
+			coef = convert_to_int if convert_to_int == abs_coef else abs_coef
+
+			if item.degree == 0 and simplified_read:
+				message += f" {coef}"
+			elif item.degree == 1:
+				if coef == 1 and simplified_read:
+					message += f" X "
+				else:
+					message += f" {coef} * X "
 			else:
-				message += f" {abs_coef} * X^{item.degree} "
+				if coef == 1 and simplified_read:
+					message += f" X^{item.degree} "
+				else:
+					message += f" {coef} * X^{item.degree} "
+
+			# if convert_to_int == abs_coef:
+			# 	if convert_to_int == 1:
+			# 		message += f" X^{item.degree} "
+			# 	else:
+			# 		message += f" {convert_to_int} * X^{item.degree} "
+			# else:
+			# 	message += f" {abs_coef} * X^{item.degree} "
 
 		if message == "":
 			message = "0"
@@ -65,12 +89,8 @@ class Computor:
 		message = message.removeprefix(" ")
 		return message
 
-	def display_polynomial(self, message: str = ""):
-		if message != "":
-			print(f"{BHCYAN}{message.ljust(30)}|{BHWHITE} {self.display_side('left')} = {self.display_side('right')}{RESET}")
-		else:
-			print(f"{BHWHITE}{self.display_side('left')} = {self.display_side('right')}{RESET}")
-		print(31 * "=")
+	def display_polynomial(self, message: str = "", simplified_read: bool = False):
+		display_status(message, f"{self.display_side('left', simplified_read)} = {self.display_side('right', simplified_read)}", BHCYAN)
 
 	def __initEquation(self) -> None:
 		if (is_polynomial_form(self.polynomial) == False):
@@ -84,7 +104,7 @@ class Computor:
 			raise InvalidPolynomialError
 
 		# Print : Init list with your params.
-		# self.display_polynomial("Init with params")
+		self.display_polynomial("Init with params")
 
 		self.lhs.sort(key=lambda x: x.degree, reverse=True)
 		self.rhs.sort(key=lambda x: x.degree, reverse=True)
@@ -93,7 +113,7 @@ class Computor:
 			self.lhs, self.rhs = self.rhs, self.lhs
 
 		# Print : Sort list
-		# self.display_polynomial("Sort monomial by degrees")
+		self.display_polynomial("Sort monomial by degrees")
 
 
 	def __reducePolynomial(self) -> bool:
@@ -102,7 +122,6 @@ class Computor:
 
 		# Print : Simplified expressions
 		# print(self.lhs)
-		# self.display_polynomial()
 
 		for monomial_right in self.rhs:
 			if monomial_right.coefficient != 0:
@@ -113,7 +132,7 @@ class Computor:
 
 		self.rhs.clear()
 		self.lhs = simplifiedPolynomialSide(self.lhs)
-		# self.display_polynomial()
+		# self.display_polynomial("Simplified expressions")
 
 		for monomial_left in self.lhs:
 			for monomial_right in self.rhs:
@@ -121,6 +140,9 @@ class Computor:
 					if monomial_right.coefficient < 0:
 						monomial_left.coefficient -= monomial_right.coefficient
 						monomial_right.coefficient = 0
+
+		self.display_polynomial("Reduced form | (Full)", False)
+		self.display_polynomial("Reduced form | (Simplified)", True)
 
 		return True
 
@@ -144,17 +166,41 @@ class Computor:
 		if self.solution is None:
 			print("Please solve the equation before try to get solution.")
 		solution_degree = self.solution['degree']
+		display_status("Polynomial degree", f"({solution_degree})", BHMAG)
+
 		if solution_degree == 0:
-			pass
+			if self.solution['has_solution']:
+				display_status("Solution", "All values of x are solutions.", BHGREEN)
+			else:
+				display_status("Solution", f"No solution exists for this constant equation : {self.display_side('left')} != {self.display_side('right')}", BHRED, BRED)
+
 		elif solution_degree == 1:
-			pass
+			if self.solution['has_solution']:
+				display_status("Solution", f"x = {self.solution['x']}", BHGREEN)
+			else:
+				display_status("Solution", f"No solution found for the equation : {self.display_side('left')} != {self.display_side('right')}, ", BHRED, BRED)
+
 		elif solution_degree == 2:
-			pass
+			display_status("Delta", f"Δ = {self.solution['delta']}", BHBLUE)
+			if self.solution['has_solution']:
+				if self.solution['delta'] == 0:
+					display_status("Number of solutions : 1", f"Δ == {self.solution['delta']}", BHGREEN)
+					display_status("Solution | x", f"{self.solution['x1']}", BHGREEN)
+
+				else:
+					display_status("Number of solutions : 2", f"Δ > 0", BHGREEN)
+					display_status("Solution | x1", f"{self.solution['x1']}", BHGREEN)
+					display_status("Solution | x2", f"{self.solution['x2']}", BHGREEN)
+
+			else:
+				display_status("Number of solutions : 0", f"Δ < 0", BHGREEN)
+				display_status("Solution | x", f"No real solution found for the quadratic equation.", BHRED, BRED)
+
 		else:
-			pass
+			print(f"{BHYELLOW}The polynomial degree is strictly greater than 2, I can't solve.{RESET}")
 
 
-	def solve(self) -> str:
+	def __solve(self) -> None:
 		polynomial_degree = self.get_polynomial_degree()
 		if polynomial_degree == 0:
 			self.solution = solve_polynomial_deg_0(self.lhs, self.rhs)
@@ -164,11 +210,9 @@ class Computor:
 			self.solution = solve_polynomial_deg_2(self.lhs, self.rhs)
 		else:
 			self.solution = {
-			"has_solution": None,
-			"degree": polynomial_degree,
+				"has_solution": None,
+				"degree": polynomial_degree,
 			}
-			return "The polynomial degree is strictly greater than 2, I can't solve."
-		return ""
 
 if __name__ == "__main__":
 	# Computor("3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2  = 1 X^1")
@@ -178,11 +222,14 @@ if __name__ == "__main__":
 	# Computor("3 * X^3 -5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1   X^1 - 1 X^1")
 	# Computor("1 X^1 = 3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2")
 	try:
-		# computor = Computor("X^3 + X^2 - X^1 - X^0 = 0")
-		computor = Computor("5 * X^0 + 4 * X^1 = 4 * X^0")
-		print(f"Polynomial degree: {computor.get_polynomial_degree()}")
-		# computor.get_solution()
-		computor.solve()
-		print(computor.get_solution())
+		# computor = Computor("42X^2 = 42X^2") # deg 0 : true
+		# computor = Computor("1 = 0") # deg 0 : false
+		# computor = Computor("4x + 1 = 0") # deg 1 : true
+		# computor = Computor("0x + 1 = 0") # deg 1 : false
+		# computor = Computor("3x^2 - 5x + 2 = 0") # deg 2 : delta > 0
+		# computor = Computor("x^2 - 4x + 4 = 0") # deg 2 : delta = 0
+		# computor = Computor("x^2 + 2x + 5 = 0") # deg 2 : delta < 0
+		computor = Computor("+ 2x^2 + 5 = 0+ 2x + 7") # deg 2 : delta < 0
+		computor.display_solution(); exit(1)
 	except Exception as error:
 		print(f"Error: {error}")

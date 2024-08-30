@@ -17,7 +17,7 @@ if __name__ == "__main__":
 	else:
 		try:
 			polynomial = Computor(sys.argv[1])
-			polynomial.solve()
+			# polynomial.solve()
 			polynomial.display_solution()
 		except InvalidPolynomialError:
 			print_error("The provided polynomial is invalid. Please check the format and try again.")
