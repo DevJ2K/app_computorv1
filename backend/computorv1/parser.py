@@ -24,6 +24,12 @@ def is_polynomial_form(polynomial: str) -> bool:
 	if (is_an_equation(polynomial) == False):
 		return False
 
+	regex_duplicates = r"(?:\d+\s+\d+)|(?:[xX]\s*[xX])"
+	match_duplicates = re.search(regex_duplicates, polynomial)
+	# print(match_duplicates)
+	if match_duplicates:
+		# print(match_duplicates)
+		return False
 	# regex = r"(\s*[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*X\^\d+)?)"
 	regex = MyRegex['monomial']
 	# polynomial = re.sub(r"\s*", "", polynomial)
@@ -88,6 +94,8 @@ def simplifiedPolynomialSide(side: list[Monomial]) -> list[Monomial]:
 
 if (__name__ == "__main__"):
 	# print(convertToMonomialList("5 X^0"))
+	print(is_polynomial_form("5 5 5 5 = 0"))
+	print(is_polynomial_form("5 * XXXXXXXXXXXXxX^0 + 4 * X^1 - 9.3 * X^2 = 0"))
 	print(is_polynomial_form("X^3 + X^2 - X^1 = x^3"))
 	# temp_list = convertToMonomialList("2 * X^2 - 2 * X^2 - 2 * X^2 + 4 * X^1 + 4 * X^1")
 	# print(temp_list)
