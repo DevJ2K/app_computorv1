@@ -6,8 +6,10 @@ from equation_solver import solve_polynomial_deg_0, solve_polynomial_deg_1, solv
 import re
 
 def display_status(title: str, message: str, title_color: str = BHCYAN, message_color: str = BHWHITE):
+	# print(33 * "=")
 	print(f"{title_color}{title.ljust(30)}|{message_color} {message}{RESET}")
 	print(33 * "=")
+	# print()
 
 class Computor:
 	"""Computor class : To manipulate polynomial second or lower degree equation."""
@@ -40,13 +42,13 @@ class Computor:
 		return False
 
 	def display_side(self, side: str, simplified_read: bool = False) -> str:
-		select_side: list[Monomial] = None
+		select_side: list[Monomial] = []
 		if side == "left":
 			select_side = self.lhs
 		elif side == "right":
 			select_side = self.rhs
 		else:
-			return None
+			return ""
 
 		message: str = ""
 
@@ -63,8 +65,8 @@ class Computor:
 
 			if item.degree == 0 and simplified_read:
 				message += f" {coef}"
-			elif item.degree == 1:
-				if coef == 1 and simplified_read:
+			elif item.degree == 1 and simplified_read:
+				if coef == 1:
 					message += f" X "
 				else:
 					message += f" {coef} * X "
@@ -104,7 +106,7 @@ class Computor:
 			raise InvalidPolynomialError
 
 		# Print : Init list with your params.
-		self.display_polynomial("Init with params")
+		self.display_polynomial("Initialize with parameters")
 
 		self.lhs.sort(key=lambda x: x.degree, reverse=True)
 		self.rhs.sort(key=lambda x: x.degree, reverse=True)
@@ -113,15 +115,14 @@ class Computor:
 			self.lhs, self.rhs = self.rhs, self.lhs
 
 		# Print : Sort list
-		self.display_polynomial("Sort monomial by degrees")
+		self.display_polynomial("Sort monomials by degrees")
 
 
 	def __reducePolynomial(self) -> bool:
 		self.lhs = simplifiedPolynomialSide(self.lhs)
 		self.rhs = simplifiedPolynomialSide(self.rhs)
 
-		# Print : Simplified expressions
-		# print(self.lhs)
+		self.display_polynomial("Simplify constant terms")
 
 		for monomial_right in self.rhs:
 			if monomial_right.coefficient != 0:
@@ -131,6 +132,9 @@ class Computor:
 
 
 		self.rhs.clear()
+
+		self.display_polynomial("Move all terms to one side")
+
 		self.lhs = simplifiedPolynomialSide(self.lhs)
 		# self.display_polynomial("Simplified expressions")
 
