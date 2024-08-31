@@ -24,6 +24,7 @@ class Computor:
 
 		self.solution: dict | None = None
 
+		print(33 * "=")
 		display_status("Input", polynomial, BHYELLOW, BHWHITE)
 		self.__initEquation()
 		self.__reducePolynomial()
