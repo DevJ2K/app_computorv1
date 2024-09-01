@@ -18,7 +18,7 @@
         id="test-input"
         type="text"
         placeholder="Enter your equation (e.g., 2x^2 - 4x - 6)"
-        class="dark:bg-d-background w-full max-w-md rounded-lg border-2 border-ui-border bg-white px-4 py-2 text-lg text-high-contrast-text focus:outline-none focus:ring-2 focus:ring-accent-color dark:border-d-ui-border dark:text-d-high-contrast-text dark:focus:ring-d-accent-color"
+        class="w-full max-w-md rounded-lg border-2 border-ui-border bg-white px-4 py-2 text-lg text-high-contrast-text focus:outline-none focus:ring-2 focus:ring-accent-color dark:border-d-ui-border dark:bg-gray-800 dark:text-d-low-contrast-text dark:focus:ring-d-accent-color"
         :disabled="isLoading"
       />
       <button
@@ -39,7 +39,7 @@
 
     <!-- Error Message -->
     <section v-if="error" class="mb-12">
-      <div class="dark:border-d-red-500 dark:bg-d-red-50 dark:text-d-red-500 rounded-md border-l-4 border-red-500 bg-red-50 p-4 text-red-500 shadow-md">
+      <div class="dark:border-d-red-500 dark:bg-d-red-50 dark:text-d-red-500 rounded-md border-l-4 border-red-500 bg-red-50 p-4 text-red-500 shadow-md dark:bg-gray-800">
         <h2 class="text-xl font-semibold">Error</h2>
         <p>{{ error }}</p>
       </div>
@@ -52,22 +52,22 @@
           <h2 class="mb-4 text-2xl font-semibold text-high-contrast-text dark:text-d-high-contrast-text">Results</h2>
 
           <!-- Degree 0 -->
-          <div v-if="result.degree === 0" class="dark:bg-d-gray-800 rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color">
+          <div v-if="result.degree === 0" class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
             <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">The equation has no solutions (constant equation).</p>
           </div>
 
           <!-- Degree 1 -->
-          <div v-if="result.degree === 1" class="dark:bg-d-gray-800 rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color">
+          <div v-if="result.degree === 1" class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
             <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
-              The equation has one solution: <span class="font-bold text-high-contrast-text dark:text-d-high-contrast-text">x = {{ result.x }}</span>
+              The equation has one solution: <span class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">x = {{ result.x }}</span>
             </p>
           </div>
 
           <!-- Degree 2 with Δ -->
-          <div v-if="result.degree === 2" class="dark:bg-d-gray-800 rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color">
+          <div v-if="result.degree === 2" class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
             <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
               The equation has {{ result.has_solution ? 'solutions' : 'no solutions' }}.
-              <span v-if="result.delta !== undefined" class="font-bold text-high-contrast-text dark:text-d-high-contrast-text">Δ = {{ result.delta }}</span>
+              <span v-if="result.delta !== undefined" class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">Δ = {{ result.delta }}</span>
             </p>
             <div v-if="result.has_solution" class="mt-4">
               <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
@@ -78,7 +78,7 @@
           </div>
 
           <!-- Degree > 2 -->
-          <div v-if="result.degree > 2" class="dark:bg-d-gray-800 rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color">
+          <div v-if="result.degree > 2" class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
             <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
               The equation has a degree higher than 2 and cannot be solved by this tool.
             </p>
@@ -100,6 +100,7 @@ const error = ref<string | null>(null);
 const makeRequests = async () => {
   isLoading.value = true;
   error.value = null; // Clear previous errors
+  result.value = null;
   await new Promise((resolve) => setTimeout(resolve, 1000));
   const input = document.getElementById("test-input") as HTMLInputElement;
   const text = input?.value || '';
@@ -111,7 +112,7 @@ const makeRequests = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name: text }),
+      body: JSON.stringify({ content: text }),
     });
 
     if (!response.ok) {
