@@ -4,7 +4,7 @@
 			<div id="navMenu"
 				class="absolute top-0 h-screen w-full -translate-x-full transition-transform duration-500 md:hidden">
 				<ul
-					class=" bg-app-bg text-high-contrast-text dark:bg-d-app-bg dark:text-d-high-contrast-text flex size-full flex-col items-center justify-center gap-14 py-4 text-xl font-semibold">
+					class=" flex size-full flex-col items-center justify-center gap-14 bg-app-bg py-4 text-xl font-semibold text-high-contrast-text dark:bg-d-app-bg dark:text-d-high-contrast-text">
 
 					<li class="group relative w-max">
 						<p @click="routerTo('/')"
@@ -14,24 +14,27 @@
 
 					</li>
 					<li class="group relative w-max">
-						<p @click="routerTo('/page1')"
+						<p @click="routerTo('/learn-math')"
 							class="cursor-pointer transition-all group-hover:text-black dark:group-hover:text-white">
-							Page 1</p>
+							Learn the Math</p>
 						<span class="animate-underline"></span>
 
 					</li>
 					<li class="group relative w-max">
-						<p @click="routerTo('/page2')"
+						<p @click="routerTo('/playground')"
 							class="cursor-pointer transition-all group-hover:text-black dark:group-hover:text-white">
-							Page 2</p>
+							Try It Out</p>
 						<span class="animate-underline"></span>
 
 					</li>
 					<a :href="downloadLink" target="_blank"
-							class="border-accent-color text-high-contrast-text hover:bg-accent-color dark:text-d-high-contrast-text group flex flex-row items-center gap-1.5 rounded-full border-2 px-6 py-2 transition-colors">
-							<DownloadSvg svg-class="text-high-contrast-text size-5 group-hover:text-white transition-colors"/>
-							<span class=" font-semibold transition-colors group-hover:text-white">Download</span>
+						class="group flex flex-row items-center gap-1.5 rounded-full border-2 border-accent-color px-6 py-2 text-high-contrast-text transition-colors hover:bg-accent-color hover:text-white dark:border-d-accent-color dark:text-d-high-contrast-text dark:hover:bg-d-accent-color dark:hover:text-white">
+						<DownloadSvg
+							svg-class="text-high-contrast-text dark:text-d-high-contrast-text size-5 group-hover:text-white dark:group-hover:text-white transition-colors" />
+						<span
+							class="font-semibold transition-colors group-hover:text-white dark:group-hover:text-white">Download</span>
 					</a>
+
 				</ul>
 			</div>
 
@@ -45,36 +48,39 @@
 					</div>
 				</div>
 				<ul
-					class=" text-high-contrast-text dark:text-d-high-contrast-text flex w-1/3 flex-row items-center justify-center gap-8 text-lg font-semibold max-md:hidden">
+					class=" flex w-1/3 flex-row items-center justify-center gap-8 text-lg font-semibold text-high-contrast-text dark:text-d-high-contrast-text max-md:hidden">
 					<li class="group relative w-max">
 						<p @click="routerTo('/')"
-							class="cursor-pointer transition-all group-hover:text-black dark:group-hover:text-white">
+							class="cursor-pointer text-nowrap transition-all group-hover:text-black dark:group-hover:text-white">
 							Home</p>
 						<span class="animate-underline"></span>
 
 					</li>
 					<li class="group relative w-max">
-						<p @click="routerTo('/page1')"
-							class="cursor-pointer transition-all group-hover:text-black dark:group-hover:text-white">
-							Page 1</p>
+						<p @click="routerTo('/learn-math')"
+							class="cursor-pointer text-nowrap transition-all group-hover:text-black dark:group-hover:text-white">
+							Learn the Math</p>
 						<span class="animate-underline"></span>
 
 					</li>
 					<li class="group relative w-max">
-						<p @click="routerTo('/page2')"
-							class="cursor-pointer transition-all group-hover:text-black dark:group-hover:text-white">
-							Page 2</p>
+						<p @click="routerTo('/playground')"
+							class="cursor-pointer text-nowrap transition-all group-hover:text-black dark:group-hover:text-white">
+							Try It Out</p>
 						<span class="animate-underline"></span>
 
 					</li>
 				</ul>
-				<div class=" flex w-1/3 justify-end max-md:hidden">
+				<div class="flex w-1/3 justify-end max-md:hidden">
 					<a :href="downloadLink" target="_blank"
-						class="border-accent-color text-high-contrast-text hover:bg-accent-color dark:text-d-high-contrast-text group flex flex-row items-center gap-1.5 rounded-full border-2 px-6 py-2 transition-colors">
-						<DownloadSvg svg-class="text-high-contrast-text size-5 group-hover:text-white transition-colors"/>
-						<span class=" font-semibold transition-colors group-hover:text-white">Download</span>
+						class="group flex flex-row items-center gap-1.5 rounded-full border-2 border-accent-color px-6 py-2 text-high-contrast-text transition-colors hover:bg-accent-color hover:text-white dark:border-d-accent-color dark:text-d-high-contrast-text dark:hover:bg-d-accent-color dark:hover:text-white">
+						<DownloadSvg
+							svg-class="text-high-contrast-text dark:text-d-high-contrast-text size-5 group-hover:text-white dark:group-hover:text-white transition-colors" />
+						<span
+							class="font-semibold transition-colors group-hover:text-white dark:group-hover:text-white">Download</span>
 					</a>
 				</div>
+
 
 				<div class="z-[1] size-fit cursor-pointer md:hidden" @click="toggleMenu">
 					<NavHamburger />

@@ -9,18 +9,24 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        title: 'Title | Untitled'
+        title: 'Computorv1 | Home'
       }
     },
     {
-      path: '/page1',
-      name: 'page1',
-      component: () => import('../views/Page_1.vue')
+      path: '/playground',
+      name: 'playground',
+      component: () => import('../views/TestView.vue'),
+      meta: {
+        title: 'Computorv1 | Playground'
+      }
     },
     {
-      path: '/page2',
-      name: 'page2',
-      component: () => import('../views/Page_2.vue')
+      path: '/learn-math',
+      name: 'learn-math',
+      component: () => import('../views/LearnMathView.vue'),
+      meta: {
+        title: 'Computorv1 | Learn the Math'
+      }
     }
   ]
 })
