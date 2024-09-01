@@ -165,6 +165,26 @@ class Computor:
 		if self.solution is None:
 			print("Please solve the equation before try to get solution.")
 			return {}
+		# print(f"{self.display_side("left", True)} = {self.display_side("right", True)}")
+		degree = self.get_polynomial_degree()
+		if self.get_polynomial_degree() == 1:
+			for monomial in self.lhs:
+				coef = int(monomial.coefficient) if int(monomial.coefficient) == monomial.coefficient else monomial.coefficient
+				if monomial.degree == 0:
+					self.solution.update({"b": coef})
+				if monomial.degree == 1:
+					self.solution.update({"a": coef})
+		elif self.get_polynomial_degree() == 2:
+			for monomial in self.lhs:
+				coef = int(monomial.coefficient) if int(monomial.coefficient) == monomial.coefficient else monomial.coefficient
+				if monomial.degree == 0:
+					self.solution.update({"c": coef})
+				if monomial.degree == 1:
+					self.solution.update({"b": coef})
+				if monomial.degree == 2:
+					self.solution.update({"a": coef})
+
+		self.solution.update({"equation": f"{self.display_side("left", True)} = {self.display_side("right", True)}"})
 		return self.solution
 
 	def display_solution(self) -> None:
@@ -234,7 +254,10 @@ if __name__ == "__main__":
 		# computor = Computor("3x^2 - 5x + 2 = 0") # deg 2 : delta > 0
 		# computor = Computor("x^2 - 4x + 4 = 0") # deg 2 : delta = 0
 		# computor = Computor("x^2 + 2x + 5 = 0") # deg 2 : delta < 0
-		computor = Computor("+ 2x^2 + 5 = 0+ 2x + 7") # deg 2 : delta < 0
-		computor.display_solution(); exit(1)
+		# computor = Computor("+ 2x^2 + 5 = 0+ 2x + 7") # deg 2 : delta < 0
+		computor = Computor("4x^2 + 3x^1 + 1 * X^0 = 0 -6x")
+		from pprint import pprint
+		pprint(computor.get_solution())
+		# computor.display_solution(); exit(1)
 	except Exception as error:
 		print(f"Error: {error}")
