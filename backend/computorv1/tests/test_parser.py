@@ -55,6 +55,9 @@ def test_invalid_polynomial_form():
 	assert is_polynomial_form("5 * XXXXXXXXXXXXxX^0 + 4 * X^1 - 9.3 * X^2 = 0") == False
 	assert is_polynomial_form("5 5 5 5 = 0") == False
 	assert is_polynomial_form("5 * X^0 + 4 * X^1 - 9.3 * X^2 = ") == False
+	assert is_polynomial_form("5 * X^0 + 4 * X^1 - 9.3 * xX^2 = 0") == False
+	assert is_polynomial_form("5 * X^0 + 4 * X^1 - 9.3 * fX^2 = 0") == False
+	assert is_polynomial_form("5 * X^0 + 4 * X^1 - 9.3 * X^2a = 0") == False
 	assert is_polynomial_form("--5 * X^0 + 4 * X^1 - 9.3 * X^2 = 0") == False
 	assert is_polynomial_form("5 * X^    0 + 4 * X^1 - 9.3 * X^2 = 0") == False
 	assert is_polynomial_form("5 * + 4 * X^1 - 9.3 * X^2 = 0") == False
