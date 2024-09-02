@@ -3,6 +3,7 @@ from parser import is_polynomial_form, convertToMonomialList, simplifiedPolynomi
 from Monomial import Monomial
 from ErrorManager import *
 from equation_solver import solve_polynomial_deg_0, solve_polynomial_deg_1, solve_polynomial_deg_2
+from irreducible_fraction import reduce_fraction
 import re
 
 def display_status(title: str, message: str, title_color: str = BHCYAN, message_color: str = BHWHITE):
@@ -167,6 +168,10 @@ class Computor:
 			return {}
 		# print(f"{self.display_side("left", True)} = {self.display_side("right", True)}")
 		degree = self.get_polynomial_degree()
+		self.solution.update({"a": 0})
+		self.solution.update({"b": 0})
+		self.solution.update({"c": 0})
+
 		if self.get_polynomial_degree() == 1:
 			for monomial in self.lhs:
 				coef = int(monomial.coefficient) if int(monomial.coefficient) == monomial.coefficient else monomial.coefficient
@@ -175,9 +180,15 @@ class Computor:
 				if monomial.degree == 1:
 					self.solution.update({"a": coef})
 
+
 			self.solution.update({"irreducible": False})
 			if self.solution['has_solution']:
 				self.solution.update({"irreducible": needToReduce(self.solution['x'])})
+				if needToReduce(self.solution['x']):
+					dict_nb = reduce_fraction(self.solution['a'], self.solution['b'])
+					self.solution.update({"x_numerator": dict_nb['numerator']})
+					self.solution.update({"x_denominator": dict_nb['denominator']})
+
 
 
 		elif self.get_polynomial_degree() == 2:
