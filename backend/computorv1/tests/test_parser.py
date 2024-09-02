@@ -69,6 +69,7 @@ def test_invalid_polynomial_form():
 	assert is_polynomial_form("5 * X^12 + 4 * X^1 - 9.43 * X^2  0^4") == False
 	assert is_polynomial_form("5 * X^12 + 4 * X^1 - 9.43 * X^2 == 0^4") == False
 	assert is_polynomial_form("5- = X^1") == False
+	assert is_polynomial_form("6x^29 x + 3 = 0") == False
 
 
 def _strMonomialList(polynomial: str) -> str:
