@@ -274,21 +274,21 @@ const error = ref<string | null>(null);
 //  'x2': 1}
 
 
-result.value = {'a': 3,
- 'b': -5,
- 'c': 2,
- 'degree': 2,
- 'delta': 2,
- 'equation': '3 * X^2 - 5 * X + 2 = 0',
- 'has_solution': true,
- 'irreducible_x1': true,
- 'x1_numerator': 12,
- 'x1_denominator': 8,
- 'irreducible_x2': false,
- 'x2_numerator': 12,
- 'x2_denominator': 8,
- 'x1': 0.6666666666666666,
- 'x2': 1}
+// result.value = {'a': 3,
+//  'b': -5,
+//  'c': 2,
+//  'degree': 2,
+//  'delta': 2,
+//  'equation': '3 * X^2 - 5 * X + 2 = 0',
+//  'has_solution': true,
+//  'irreducible_x1': true,
+//  'x1_numerator': 12,
+//  'x1_denominator': 8,
+//  'irreducible_x2': false,
+//  'x2_numerator': 12,
+//  'x2_denominator': 8,
+//  'x1': 0.6666666666666666,
+//  'x2': 1}
 
 // result.value = {'a': 3,
 //  'b': -5,
@@ -344,7 +344,12 @@ const makeRequests = async () => {
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      const data = await response.json();
+      if (data.detail) {
+        throw new Error(data.detail);
+      } else {
+        throw new Error;
+      }
     }
 
     const data = await response.json();
