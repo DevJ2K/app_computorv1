@@ -30,6 +30,10 @@ def is_polynomial_form(polynomial: str) -> bool:
 	if match_duplicates:
 		# print(match_duplicates)
 		return False
+	regex_follow_x = r"\^\d+\s*[xX]"
+	match_follow_x = re.search(regex_follow_x, polynomial)
+	if match_follow_x:
+		return False
 	# regex = r"(\s*[-+]?\s*\d+(?:\.\d+)?\s*(?:\*\s*X\^\d+)?)"
 	regex = MyRegex['monomial']
 	# polynomial = re.sub(r"\s*", "", polynomial)
