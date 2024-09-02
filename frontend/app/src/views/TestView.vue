@@ -1,15 +1,15 @@
 <template>
-  <main class="container mx-auto my-12 px-4 text-high-contrast-text dark:text-d-high-contrast-text md:px-8 lg:px-16">
+  <main class="text-high-contrast-text dark:text-d-high-contrast-text container mx-auto my-12 px-4 md:px-8 lg:px-16">
     <!-- Titre Principal de la Page -->
     <div class="mb-12 flex w-full items-center justify-center">
       <h1
-        class="border-b-2 border-accent-color pb-2 text-4xl font-extrabold text-high-contrast-text dark:border-d-accent-color dark:text-d-high-contrast-text">
+        class="border-accent-color text-high-contrast-text dark:border-d-accent-color dark:text-d-high-contrast-text border-b-2 pb-2 text-4xl font-extrabold">
         Try It Out</h1>
     </div>
 
     <!-- Description -->
     <section class="mb-12">
-      <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
+      <p class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
         Solve your quadratic or linear equations using Computorv1. Enter an equation below and click the "Solve" button
         to see the result.
       </p>
@@ -18,10 +18,10 @@
     <!-- Input and Button -->
     <section class="mb-12 flex flex-col items-center gap-4">
       <input id="test-input" type="text" placeholder="Enter your equation (e.g., 2x^2 - 4x - 6)"
-        class="w-full max-w-md rounded-lg border-2 border-ui-border bg-white px-4 py-2 text-lg text-high-contrast-text focus:outline-none focus:ring-2 focus:ring-accent-color dark:border-d-ui-border dark:bg-gray-800 dark:text-d-low-contrast-text dark:focus:ring-d-accent-color"
+        class="border-ui-border text-high-contrast-text focus:ring-accent-color dark:border-d-ui-border dark:text-d-low-contrast-text dark:focus:ring-d-accent-color w-full max-w-md rounded-lg border-2 bg-white px-4 py-2 text-lg focus:outline-none focus:ring-2 dark:bg-gray-800"
         :disabled="isLoading" />
       <button @click="makeRequests"
-        class="hover:bg-accent-color-dark dark:hover:bg-d-accent-color-dark rounded-full bg-accent-color px-6 py-2 font-semibold text-white transition-colors dark:bg-d-accent-color"
+        class="hover:bg-accent-color-dark dark:hover:bg-d-accent-color-dark bg-accent-color dark:bg-d-accent-color rounded-full px-6 py-2 font-semibold text-white transition-colors"
         :disabled="isLoading">
         Solve
       </button>
@@ -48,42 +48,42 @@
       <transition name="fade">
         <div v-if="result" key="result" class="flex flex-col gap-8">
           <div>
-            <h2 class="mb-2 text-2xl font-semibold text-high-contrast-text dark:text-d-high-contrast-text">Informations
+            <h2 class="text-high-contrast-text dark:text-d-high-contrast-text mb-2 text-2xl font-semibold">Informations
             </h2>
             <div
-              class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
-              <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">Reduced form: <span
-                  class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">{{ result.equation }}</span>
+              class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
+              <p class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">Reduced form: <span
+                  class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">{{ result.equation }}</span>
               </p>
-              <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">Polynomial degree: <span
-                  class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">{{ result.degree }}</span></p>
-              <p v-if="result.degree == 2" class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">Δ = {{ result.b }}<sup>2</sup> - 4 * {{ result.a }} * {{ result.c }} = <span class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">{{ result.delta }}</span></p>
+              <p class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">Polynomial degree: <span
+                  class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">{{ result.degree }}</span></p>
+              <p v-if="result.degree == 2" class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">Δ = {{ result.b }}<sup>2</sup> - 4 * {{ result.a }} * {{ result.c }} = <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">{{ result.delta }}</span></p>
             </div>
           </div>
           <div>
-            <h2 class="mb-2 text-2xl font-semibold text-high-contrast-text dark:text-d-high-contrast-text">Results</h2>
+            <h2 class="text-high-contrast-text dark:text-d-high-contrast-text mb-2 text-2xl font-semibold">Results</h2>
 
             <!-- Degree 0 -->
             <div v-if="result.degree === 0"
-              class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
+              class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
 
-              <p v-if="result.has_solution" class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">All
-                values of <span class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">x</span> are
+              <p v-if="result.has_solution" class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">All
+                values of <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">x</span> are
                 solutions.</p>
-              <p v-else class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">The equation has no
+              <p v-else class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">The equation has no
                 solutions.</p>
             </div>
 
             <!-- Degree 1 -->
             <div v-if="result.degree === 1"
-              class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
-              <div v-if="result.has_solution" class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
+              class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
+              <div v-if="result.has_solution" class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
                 The equation has one solution:
                 <div v-if="result.irreducible" class="flex flex-row items-center gap-1">
                   <p>x = <span class="font-bold">-</span></p>
                       <div class="flex flex-col items-center justify-center font-bold">
                         <p class=" translate-y-[2px]">{{ result.b }}</p>
-                        <div class=" h-[2px] w-full translate-y-[2px] bg-low-contrast-text dark:bg-d-low-contrast-text"></div>
+                        <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                         <p class=" translate-y-[2px]">{{result.a }}</p>
                       </div>
                       <div >
@@ -96,31 +96,83 @@
 
 
               </div>
-              <p v-else class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">The equation has no
+              <p v-else class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">The equation has no
                 solutions.</p>
             </div>
 
             <!-- Degree 2 with Δ -->
             <div v-if="result.degree === 2"
-              class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
-              <div v-if="result.has_solution && result.delta >= 0" class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
-                <p v-if="result.delta == 0">The equation has one solution. <span class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">Δ = 0</span></p>
-                <p v-else>The equation has two solutions. <span class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">Δ > 0</span></p>
+              class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
+              <div v-if="result.has_solution && result.delta >= 0" class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
+                <p v-if="result.delta == 0">The equation has one solution. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ = 0</span></p>
+                <p v-else>The equation has two solutions. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ > 0</span></p>
               </div>
-              <div v-else class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
+              <div v-else class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
                 <!--eslint-disable-next-line vue/no-parsing-error-->
-                <p>The equation has no solutions. <span class="font-bold text-high-contrast-text dark:text-d-low-contrast-text">Δ < 0</span></p>
+                <p>The equation has no real solutions. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ < 0</span></p>
+                <div class="mt-4">
+                  <div class="flex flex-row items-center gap-1">
+                    <p>x<sub>1</sub> = </p>
+                    <div class="flex flex-col items-center justify-center font-bold">
+
+                      <span>-b</span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                    </div>
+                    <span>-</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span>√<span class="overline">|Δ|</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                      </div>
+                      <span class="font-bold italic">i</span>
+                    <span>=</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span class=""><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} - √<span class="  ">{{ Math.abs(result.delta) }}</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>{{ 2 * result.a }}</span>
+                    </div>
+                    <span class="font-bold italic">i</span>
+
+                  </div>
+
+
+                  <div class="flex flex-row items-center gap-1">
+                    <p>x<sub>1</sub> = </p>
+                    <div class="flex flex-col items-center justify-center font-bold">
+
+                      <span>-b</span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                    </div>
+                    <span>+</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span>√<span class="overline">|Δ|</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                      </div>
+                      <span class="font-bold italic">i</span>
+                    <span>=</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span class=""><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} + √<span class="  ">{{ Math.abs(result.delta) }}</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>{{ 2 * result.a }}</span>
+                    </div>
+                    <span class="font-bold italic">i</span>
+
+                  </div>
+                </div>
               </div>
               <div v-if="result.has_solution && result.delta >= 0" class="mt-4">
                 <div v-if="result.delta > 0">
 
-                  <div class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
+                  <div class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
 
                     <div class="flex flex-row items-center gap-1">
                       <p>x<sub>1</sub> = </p>
                       <div v-if="result.irreducible_x1" class="flex flex-col items-center justify-center font-bold">
                         <p class=" translate-y-[2px]"><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} - √{{ result.delta }}</p>
-                        <div class=" h-[2px] w-full translate-y-[2px] bg-low-contrast-text dark:bg-d-low-contrast-text"></div>
+                        <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                         <p class=" translate-y-[2px]">{{ 2 * result.a }}</p>
                       </div>
                       <div v-else>
@@ -132,7 +184,7 @@
                       <p>x<sub>1</sub> = </p>
                       <div v-if="result.irreducible_x2" class="flex flex-col items-center justify-center font-bold">
                         <p class=" translate-y-[2px]"><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} + √{{ result.delta }}</p>
-                        <div class=" h-[2px] w-full translate-y-[2px] bg-low-contrast-text dark:bg-d-low-contrast-text"></div>
+                        <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                         <p class=" translate-y-[2px]">{{ 2 * result.a }}</p>
                       </div>
                       <div v-else>
@@ -151,11 +203,11 @@
                   </div> -->
                 </div>
                 <div v-else>
-                  <div class="flex flex-row items-center gap-1 text-lg text-low-contrast-text dark:text-d-low-contrast-text">
+                  <div class="text-low-contrast-text dark:text-d-low-contrast-text flex flex-row items-center gap-1 text-lg">
                     <p>x = </p>
                     <div v-if="result.irreducible_x1" class="flex flex-col items-center justify-center font-bold">
                       <p class=" translate-y-[2px]">{{ result.x1_numerator }}</p>
-                      <div class=" h-[2px] w-full translate-y-[2px] bg-low-contrast-text dark:bg-d-low-contrast-text"></div>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                       <p class=" translate-y-[2px]">{{ result.x1_denominator }}</p>
                     </div>
                     <div v-else>
@@ -168,8 +220,8 @@
 
             <!-- Degree > 2 -->
             <div v-if="result.degree > 2"
-              class="rounded-md border-l-4 border-accent-color bg-gray-50 p-4 shadow-md dark:border-d-accent-color dark:bg-gray-800">
-              <p class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
+              class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
+              <p class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
                 The equation has a degree higher than 2 and cannot be solved by this tool.
               </p>
             </div>
@@ -225,21 +277,21 @@ const error = ref<string | null>(null);
 
 
 // DEGREES 2
-// result.value = {'a': 3,
-//  'b': -5,
-//  'c': 2,
-//  'degree': 2,
-//  'delta': -1,
-//  'equation': '3 * X^2 - 5 * X + 2 = 0',
-//  'has_solution': false,
-//  'irreducible_x1': true,
-//  'x1_numerator': 12,
-//  'x1_denominator': 8,
-//  'irreducible_x2': false,
-//  'x2_numerator': 12,
-//  'x2_denominator': 8,
-//  'x1': 0.6666666666666666,
-//  'x2': 1}
+result.value = {'a': 3,
+ 'b': 5,
+ 'c': 2,
+ 'degree': 2,
+ 'delta': -1,
+ 'equation': '3 * X^2 + 5 * X + 2 = 0',
+ 'has_solution': false,
+ 'irreducible_x1': true,
+ 'x1_numerator': 12,
+ 'x1_denominator': 8,
+ 'irreducible_x2': false,
+ 'x2_numerator': 12,
+ 'x2_denominator': 8,
+ 'x1': 0.6666666666666666,
+ 'x2': 1}
 
 // result.value = {'a': 3,
 //  'b': -5,
