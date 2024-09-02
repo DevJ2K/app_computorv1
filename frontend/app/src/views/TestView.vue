@@ -82,9 +82,9 @@
                 <div v-if="result.irreducible" class="flex flex-row items-center gap-1">
                   <p>x = <span class="font-bold">-</span></p>
                       <div class="flex flex-col items-center justify-center font-bold">
-                        <p class=" translate-y-[2px]">{{ result.b }}</p>
+                        <p class=" translate-y-[2px]">{{ result.x_numerator }}</p>
                         <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
-                        <p class=" translate-y-[2px]">{{result.a }}</p>
+                        <p class=" translate-y-[2px]">{{result.x_denominator }}</p>
                       </div>
                       <div >
 
@@ -125,20 +125,20 @@
                       <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                       <span>2a</span>
                       </div>
-                      <span class="font-bold italic">i</span>
+                      <span class="font-bold">𝑖</span>
                     <span>=</span>
                     <div class="flex flex-col items-center justify-center font-bold">
                       <span class=""><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} - √<span class="  ">{{ Math.abs(result.delta) }}</span></span>
                       <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                       <span>{{ 2 * result.a }}</span>
                     </div>
-                    <span class="font-bold italic">i</span>
+                    <span class="font-bold">𝑖</span>
 
                   </div>
 
 
                   <div class="flex flex-row items-center gap-1">
-                    <p>x<sub>1</sub> = </p>
+                    <p>x<sub>2</sub> = </p>
                     <div class="flex flex-col items-center justify-center font-bold">
 
                       <span>-b</span>
@@ -151,14 +151,14 @@
                       <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                       <span>2a</span>
                       </div>
-                      <span class="font-bold italic">i</span>
+                      <span class="font-bold">𝑖</span>
                     <span>=</span>
                     <div class="flex flex-col items-center justify-center font-bold">
                       <span class=""><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} + √<span class="  ">{{ Math.abs(result.delta) }}</span></span>
                       <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
                       <span>{{ 2 * result.a }}</span>
                     </div>
-                    <span class="font-bold italic">i</span>
+                    <span class="font-bold">𝑖</span>
 
                   </div>
                 </div>
@@ -265,15 +265,17 @@ const error = ref<string | null>(null);
 // //  'x': -0.25,
 //  'x': -0.25,
 // }
-// result.value = {'a': 4,
-//  'b': 1,
-//  'degree': 1,
-//  'equation': '4 * X + 1 = 0',
-//  'has_solution': true,
-//  'irreducible': true,
-// //  'x': -0.25,
+result.value = {'a': 8,
+ 'b': 2,
+ 'degree': 1,
+ 'equation': '8 * X + 2 = 0',
+ 'has_solution': true,
+ 'irreducible': true,
+ 'x_numerator': 1,
+ 'x_denominator': 4,
 //  'x': -0.25,
-// }
+ 'x': -0.25,
+}
 
 
 // DEGREES 2
