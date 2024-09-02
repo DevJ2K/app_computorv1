@@ -255,7 +255,8 @@ if __name__ == "__main__":
 		# computor = Computor("x^2 - 4x + 4 = 0") # deg 2 : delta = 0
 		# computor = Computor("x^2 + 2x + 5 = 0") # deg 2 : delta < 0
 		# computor = Computor("+ 2x^2 + 5 = 0+ 2x + 7") # deg 2 : delta < 0
-		computor = Computor("4x^2 + 3x^1 + 1 * X^0 = 0 -6x")
+		# computor = Computor("4x^2 + 3x^1 + 1 * X^0 = 0 -6x")
+		computor = Computor("3x^2 - 5x + 2 = 0")
 		from pprint import pprint
 		pprint(computor.get_solution())
 		# computor.display_solution(); exit(1)
