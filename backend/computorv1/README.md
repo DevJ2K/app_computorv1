@@ -56,13 +56,13 @@ You can run the script in one of the following ways:
 1. **Make the script executable:**
 
    ```bash
-    chmod +x main.py
+    chmod +x computor
     ```
 
     Then execute it directly:
 
     ```bash
-    ./main.py
+    ./computor
     ```
 
 2. **Using the Python command:**
@@ -71,13 +71,13 @@ You can run the script in one of the following ways:
     python3 main.py
     ```
 
-### Expected Output
+<!-- ### Expected Output
 
 Once the script is run successfully, you should see the following output:
 
 ```
 It's work !
-```
+``` -->
 
 ### Use Case
 
@@ -85,7 +85,7 @@ It's work !
 
 <!--# Example -->
 ```bash
-./main.py
+./computor "<polynomial>"
 ```
 
 ### Visual Overview
