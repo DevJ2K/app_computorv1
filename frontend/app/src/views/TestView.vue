@@ -342,21 +342,21 @@ const error = ref<string | null>(null);
 //  'x1': 0.6666666666666666,
 //  'x2': 1}
 
-result.value = {'a': 3,
- 'b': -5,
- 'c': 2,
- 'degree': 2,
- 'delta': 2,
- 'equation': '3 * X^2 - 5 * X + 2 = 0',
- 'has_solution': true,
- 'irreducible_x1': false,
- 'x1_numerator': 12,
- 'x1_denominator': 8,
- 'irreducible_x2': false,
- 'x2_numerator': 12,
- 'x2_denominator': 8,
- 'x1': 0.6666666666666666,
- 'x2': 1}
+// result.value = {'a': 3,
+//  'b': -5,
+//  'c': 2,
+//  'degree': 2,
+//  'delta': 2,
+//  'equation': '3 * X^2 - 5 * X + 2 = 0',
+//  'has_solution': true,
+//  'irreducible_x1': false,
+//  'x1_numerator': 12,
+//  'x1_denominator': 8,
+//  'irreducible_x2': false,
+//  'x2_numerator': 12,
+//  'x2_denominator': 8,
+//  'x1': 0.6666666666666666,
+//  'x2': 1}
 
 // DEGREES > 2
 // result.value = {'a': 3,
