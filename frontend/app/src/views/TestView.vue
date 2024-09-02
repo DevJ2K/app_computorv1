@@ -119,9 +119,9 @@
                     <div class="flex flex-row items-center gap-1">
                       <p>x<sub>1</sub> = </p>
                       <div v-if="result.irreducible_x1" class="flex flex-col items-center justify-center font-bold">
-                        <p class=" translate-y-[2px]">{{ result.x1_numerator }}</p>
+                        <p class=" translate-y-[2px]"><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} - √{{ result.delta }}</p>
                         <div class=" h-[2px] w-full translate-y-[2px] bg-low-contrast-text dark:bg-d-low-contrast-text"></div>
-                        <p class=" translate-y-[2px]">{{ result.x1_denominator }}</p>
+                        <p class=" translate-y-[2px]">{{ 2 * result.a }}</p>
                       </div>
                       <div v-else>
                         <span class="font-bold">{{ result.x1 }}</span>
@@ -129,11 +129,11 @@
                     </div>
 
                     <div class="flex flex-row items-center gap-1">
-                      <p>x<sub>2</sub> = </p>
+                      <p>x<sub>1</sub> = </p>
                       <div v-if="result.irreducible_x2" class="flex flex-col items-center justify-center font-bold">
-                        <p class=" translate-y-[2px]">{{ result.x2_numerator }}</p>
+                        <p class=" translate-y-[2px]"><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} + √{{ result.delta }}</p>
                         <div class=" h-[2px] w-full translate-y-[2px] bg-low-contrast-text dark:bg-d-low-contrast-text"></div>
-                        <p class=" translate-y-[2px]">{{ result.x2_denominator }}</p>
+                        <p class=" translate-y-[2px]">{{ 2 * result.a }}</p>
                       </div>
                       <div v-else>
                         <span class="font-bold">{{ result.x2 }}</span>
@@ -274,21 +274,21 @@ const error = ref<string | null>(null);
 //  'x2': 1}
 
 
-// result.value = {'a': 3,
-//  'b': -5,
-//  'c': 2,
-//  'degree': 2,
-//  'delta': 2,
-//  'equation': '3 * X^2 - 5 * X + 2 = 0',
-//  'has_solution': true,
-//  'irreducible_x1': true,
-//  'x1_numerator': 12,
-//  'x1_denominator': 8,
-//  'irreducible_x2': false,
-//  'x2_numerator': 12,
-//  'x2_denominator': 8,
-//  'x1': 0.6666666666666666,
-//  'x2': 1}
+result.value = {'a': 3,
+ 'b': -5,
+ 'c': 2,
+ 'degree': 2,
+ 'delta': 2,
+ 'equation': '3 * X^2 - 5 * X + 2 = 0',
+ 'has_solution': true,
+ 'irreducible_x1': true,
+ 'x1_numerator': 12,
+ 'x1_denominator': 8,
+ 'irreducible_x2': false,
+ 'x2_numerator': 12,
+ 'x2_denominator': 8,
+ 'x1': 0.6666666666666666,
+ 'x2': 1}
 
 // result.value = {'a': 3,
 //  'b': -5,

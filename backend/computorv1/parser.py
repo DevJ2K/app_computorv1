@@ -91,6 +91,21 @@ def simplifiedPolynomialSide(side: list[Monomial]) -> list[Monomial]:
 	# print(simplified_list)
 	return simplified_list
 
+def needToReduce(number: float) -> bool:
+	number_str = str(number)
+	# print(f"{number_str} | ", end="")
+	match = re.search(r"\.\d+", number_str)
+	if match:
+		if len(match.group()) > 4:
+			# print("Display irreducible fraction")
+			return True
+		else:
+			# print("Display full decimal")
+			return False
+	else:
+		# print("No match")
+		return False
+
 
 if (__name__ == "__main__"):
 	# print(convertToMonomialList("5 X^0"))

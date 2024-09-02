@@ -1,5 +1,5 @@
 from Colors import *
-from parser import is_polynomial_form, convertToMonomialList, simplifiedPolynomialSide
+from parser import is_polynomial_form, convertToMonomialList, simplifiedPolynomialSide, needToReduce
 from Monomial import Monomial
 from ErrorManager import *
 from equation_solver import solve_polynomial_deg_0, solve_polynomial_deg_1, solve_polynomial_deg_2
@@ -174,6 +174,12 @@ class Computor:
 					self.solution.update({"b": coef})
 				if monomial.degree == 1:
 					self.solution.update({"a": coef})
+
+			self.solution.update({"irreducible": False})
+			if self.solution['has_solution']:
+				self.solution.update({"irreducible": needToReduce(self.solution['x'])})
+
+
 		elif self.get_polynomial_degree() == 2:
 			for monomial in self.lhs:
 				coef = int(monomial.coefficient) if int(monomial.coefficient) == monomial.coefficient else monomial.coefficient
@@ -183,8 +189,12 @@ class Computor:
 					self.solution.update({"b": coef})
 				if monomial.degree == 2:
 					self.solution.update({"a": coef})
+			self.solution.update({"irreducible": False})
+			if self.solution['has_solution']:
+				self.solution.update({"irreducible_x1": needToReduce(self.solution['x1'])})
+				self.solution.update({"irreducible_x2": needToReduce(self.solution['x2'])})
 
-		self.solution.update({"equation": f"{self.display_side("left", True)} = {self.display_side("right", True)}"})
+		self.solution.update({"equation": f"{self.display_side('left', True)} = {self.display_side('right', True)}"})
 		return self.solution
 
 	def display_solution(self) -> None:
