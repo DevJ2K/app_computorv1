@@ -23,8 +23,8 @@ class Computor:
 		self.lhs: list[Monomial] | None = None
 		self.rhs: list[Monomial] | None = None
 
-		self.solution: dict | None = None
-
+		self.solution: dict = {}
+		self.solution["steps"] = []
 		print(33 * "=")
 		display_status("Input", polynomial, BHYELLOW, BHWHITE)
 		self.__initEquation()
@@ -96,6 +96,13 @@ class Computor:
 	def display_polynomial(self, message: str = "", simplified_read: bool = False):
 		display_status(message, f"{self.display_side('left', simplified_read)} = {self.display_side('right', simplified_read)}", BHCYAN)
 
+	def add_step(self, message: str = "", simplified_read: bool = False):
+		self.solution["steps"].append({
+			"message": message,
+			"content": f"{self.display_side('left', simplified_read)} = {self.display_side('right', simplified_read)}"
+		})
+		pass
+
 	def __initEquation(self) -> None:
 		if (is_polynomial_form(self.polynomial) == False):
 			raise InvalidPolynomialError("")
@@ -109,6 +116,7 @@ class Computor:
 
 		# Print : Init list with your params.
 		self.display_polynomial("Initialize with parameters")
+		self.add_step("Initialize with parameters")
 
 		self.lhs.sort(key=lambda x: x.degree, reverse=True)
 		self.rhs.sort(key=lambda x: x.degree, reverse=True)
@@ -118,6 +126,7 @@ class Computor:
 
 		# Print : Sort list
 		self.display_polynomial("Sort monomials by degrees")
+		self.add_step("Sort monomials by degrees")
 
 
 	def __reducePolynomial(self) -> bool:
@@ -125,6 +134,7 @@ class Computor:
 		self.rhs = simplifiedPolynomialSide(self.rhs)
 
 		self.display_polynomial("Simplify constant terms")
+		self.add_step("Simplify constant terms")
 
 		for monomial_right in self.rhs:
 			if monomial_right.coefficient != 0:
@@ -136,6 +146,7 @@ class Computor:
 		self.rhs.clear()
 
 		self.display_polynomial("Move all terms to one side")
+		self.add_step("Move all terms to one side")
 
 		self.lhs = simplifiedPolynomialSide(self.lhs)
 		# self.display_polynomial("Simplified expressions")
@@ -148,7 +159,9 @@ class Computor:
 						monomial_right.coefficient = 0
 
 		self.display_polynomial("Reduced form | (Full)", False)
+		self.add_step("Reduced form | (Full)", False)
 		self.display_polynomial("Reduced form | (Simplified)", True)
+		self.add_step("Reduced form | (Simplified)", True)
 
 		return True
 
@@ -258,16 +271,16 @@ class Computor:
 	def __solve(self) -> None:
 		polynomial_degree = self.get_polynomial_degree()
 		if polynomial_degree == 0:
-			self.solution = solve_polynomial_deg_0(self.lhs, self.rhs)
+			self.solution.update(solve_polynomial_deg_0(self.lhs, self.rhs))
 		elif polynomial_degree == 1:
-			self.solution = solve_polynomial_deg_1(self.lhs, self.rhs)
+			self.solution.update(solve_polynomial_deg_1(self.lhs, self.rhs))
 		elif polynomial_degree == 2:
-			self.solution = solve_polynomial_deg_2(self.lhs, self.rhs)
+			self.solution.update(solve_polynomial_deg_2(self.lhs, self.rhs))
 		else:
-			self.solution = {
+			self.solution.update({
 				"has_solution": None,
 				"degree": polynomial_degree,
-			}
+			})
 
 if __name__ == "__main__":
 	# Computor("3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2  = 1 X^1")
