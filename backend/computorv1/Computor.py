@@ -3,7 +3,7 @@ from parser import is_polynomial_form, convertToMonomialList, simplifiedPolynomi
 from Monomial import Monomial
 from ErrorManager import *
 from equation_solver import solve_polynomial_deg_0, solve_polynomial_deg_1, solve_polynomial_deg_2
-from irreducible_fraction import reduce_fraction
+from irreducible_fraction import reduce_fraction, reduce_polynomial_degree_2
 import re
 
 def display_status(title: str, message: str, title_color: str = BHCYAN, message_color: str = BHWHITE):
@@ -200,10 +200,19 @@ class Computor:
 					self.solution.update({"b": coef})
 				if monomial.degree == 2:
 					self.solution.update({"a": coef})
-			self.solution.update({"irreducible": False})
-			if self.solution['has_solution']:
-				self.solution.update({"irreducible_x1": needToReduce(self.solution['x1'])})
-				self.solution.update({"irreducible_x2": needToReduce(self.solution['x2'])})
+			self.solution.update({"irreducible_x1": False})
+			self.solution.update({"irreducible_x2": False})
+
+			self.solution.update({"irreducible_x1": needToReduce(self.solution['x1'])})
+			self.solution.update({"irreducible_x2": needToReduce(self.solution['x2'])})
+
+			numerator_denominator_solution = reduce_polynomial_degree_2(self.solution)
+			self.solution['x1_numerator'] = numerator_denominator_solution['x1_numerator']
+			self.solution['x2_numerator'] = numerator_denominator_solution['x2_numerator']
+			self.solution['x1_denominator'] = numerator_denominator_solution['x1_denominator']
+			self.solution['x2_denominator'] = numerator_denominator_solution['x2_denominator']
+
+
 
 		self.solution.update({"equation": f"{self.display_side('left', True)} = {self.display_side('right', True)}"})
 		return self.solution
@@ -267,7 +276,7 @@ if __name__ == "__main__":
 	# Computor("5X^2 + 3X^1 + 2 = 5X^2 + 3X^1 + 2")
 	# Computor("3 * X^3 -5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1   X^1 - 1 X^1")
 	# Computor("1 X^1 = 3 * X^3	 -5     *	 X^0   +  4 	*  X^1    -    9.3   *    X^2")
-	try:
+	# try:
 		# computor = Computor("42X^2 = 42X^2") # deg 0 : true
 		# computor = Computor("1 = 0") # deg 0 : false
 		# computor = Computor("4x + 1 = 0") # deg 1 : true
@@ -278,8 +287,9 @@ if __name__ == "__main__":
 		# computor = Computor("+ 2x^2 + 5 = 0+ 2x + 7") # deg 2 : delta < 0
 		# computor = Computor("4x^2 + 3x^1 + 1 * X^0 = 0 -6x")
 		computor = Computor("3x^2 - 5x + 2 = 0")
+		# computor = Computor("5 * X^0 + 3 * X^1 + 3 * X^2 = 1 * X^0 + 0 * X^1")
 		from pprint import pprint
 		pprint(computor.get_solution())
 		# computor.display_solution(); exit(1)
-	except Exception as error:
-		print(f"Error: {error}")
+	# except Exception as error:
+	# 	print(f"Error: {error}")

@@ -51,14 +51,14 @@ def solve_polynomial_deg_2(lhs: list[Monomial], rhs: list[Monomial]) -> dict:
 	int_delta = int(var_delta)
 	var_delta = int_delta if int_delta == var_delta else var_delta
 	# print(f"a:{var_a} | b:{var_b} | c:{var_c} | delta:{var_delta}")
-	if var_delta < 0:
-		return {
-			"has_solution": False,
-			"degree": 2,
-			"delta": var_delta,
-		}
-	x1 = ((-var_b) - var_delta ** 0.5) / (2 * var_a)
-	x2 = ((-var_b) + var_delta ** 0.5) / (2 * var_a)
+	# if var_delta < 0:
+	# 	return {
+	# 		"has_solution": False,
+	# 		"degree": 2,
+	# 		"delta": var_delta,
+	# 	}
+	x1 = ((-var_b) - abs(var_delta) ** 0.5) / (2 * var_a)
+	x2 = ((-var_b) + abs(var_delta) ** 0.5) / (2 * var_a)
 	int_x1 = int(x1)
 	int_x2 = int(x2)
 	x1 = int_x1 if int_x1 == x1 else x1
@@ -67,7 +67,7 @@ def solve_polynomial_deg_2(lhs: list[Monomial], rhs: list[Monomial]) -> dict:
 	if var_a < 0:
 		x1, x2 = x2, x1
 	return {
-		"has_solution": True,
+		"has_solution": var_delta >= 0,
 		"degree": 2,
 		"delta": var_delta,
 		"x1": x1,
