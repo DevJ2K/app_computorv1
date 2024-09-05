@@ -100,6 +100,112 @@
                 solutions.</p>
             </div>
 
+
+            <div v-if="result.degree === 2"
+            class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
+            <!-- Delta text -->
+              <div class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
+
+                <p v-if="result.delta > 0">The equation has two solutions. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ > 0</span></p>
+                <p v-else-if="result.delta == 0">The equation has one solution. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ = 0</span></p>
+                <p v-else>The equation has no real solutions. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ < 0</span></p>
+              </div>
+            <!-- Display results -->
+              <div class="mt-4">
+                <div v-if="result.delta > 0">
+                  <div class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
+                    <div class="flex flex-row items-center gap-1">
+                      <p>x<sub>1</sub> = </p>
+                      <div v-if="result.irreducible_x1" class="flex flex-col items-center justify-center font-bold">
+                        <p class=" translate-y-[2px]">{{ result.x1_numerator }}</p>
+                        <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                        <p class=" translate-y-[2px]">{{ result.x1_denominator }}</p>
+                      </div>
+                      <div v-else>
+                        <span class="font-bold">{{ result.x1 }}</span>
+                      </div>
+                    </div>
+                    <div class="flex flex-row items-center gap-1">
+                      <p>x<sub>2</sub> = </p>
+                      <div v-if="result.irreducible_x2" class="flex flex-col items-center justify-center font-bold">
+                        <p class=" translate-y-[2px]">{{ result.x2_numerator }}</p>
+                        <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                        <p class=" translate-y-[2px]">{{ result.x2_denominator }}</p>
+                      </div>
+                      <div v-else>
+                        <span class="font-bold">{{ result.x2 }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-else-if="result.delta == 0">
+                  <div class="text-low-contrast-text dark:text-d-low-contrast-text flex flex-row items-center gap-1 text-lg">
+                    <p>x = </p>
+                    <div v-if="result.irreducible_x1" class="flex flex-col items-center justify-center font-bold">
+                      <p class=" translate-y-[2px]">{{ result.x1_numerator }}</p>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <p class=" translate-y-[2px]">{{ result.x1_denominator }}</p>
+                    </div>
+                    <div v-else>
+                      <span class="font-bold">{{ result.x1 }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div v-else>
+                  <div class="text-low-contrast-text dark:text-d-low-contrast-text flex flex-row items-center gap-1 text-lg">
+                    <p>x<sub>1</sub> = </p>
+                    <div class="flex flex-col items-center justify-center font-bold">
+
+                      <span>-b</span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                    </div>
+                    <span>-</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span>√<span class="overline">|Δ|</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                      </div>
+                      <span class="font-bold">𝑖</span>
+                    <span>=</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span class=""><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} - √<span class="  ">{{ Math.abs(result.delta) }}</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>{{ 2 * result.a }}</span>
+                    </div>
+                    <span class="font-bold">𝑖</span>
+
+                  </div>
+
+
+                  <div class="text-low-contrast-text dark:text-d-low-contrast-text flex flex-row items-center gap-1 text-lg">
+                    <p>x<sub>2</sub> = </p>
+                    <div class="flex flex-col items-center justify-center font-bold">
+
+                      <span>-b</span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                    </div>
+                    <span>+</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span>√<span class="overline">|Δ|</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>2a</span>
+                      </div>
+                      <span class="font-bold">𝑖</span>
+                    <span>=</span>
+                    <div class="flex flex-col items-center justify-center font-bold">
+                      <span class=""><span v-if="result.b > 0" >-</span> {{ result.b > 0 ? result.b : Math.abs(result.b) }} + √<span class="  ">{{ Math.abs(result.delta) }}</span></span>
+                      <div class=" bg-low-contrast-text dark:bg-d-low-contrast-text h-[2px] w-full translate-y-[2px]"></div>
+                      <span>{{ 2 * result.a }}</span>
+                    </div>
+                    <span class="font-bold">𝑖</span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Degree 2 with Δ -->
             <div v-if="result.degree === 2"
               class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
@@ -265,17 +371,17 @@ const error = ref<string | null>(null);
 // //  'x': -0.25,
 //  'x': -0.25,
 // }
-result.value = {'a': 8,
- 'b': 2,
- 'degree': 1,
- 'equation': '8 * X + 2 = 0',
- 'has_solution': true,
- 'irreducible': true,
- 'x_numerator': 1,
- 'x_denominator': 4,
+// result.value = {'a': 8,
+//  'b': 2,
+//  'degree': 1,
+//  'equation': '8 * X + 2 = 0',
+//  'has_solution': true,
+//  'irreducible': true,
+//  'x_numerator': 1,
+//  'x_denominator': 4,
+// //  'x': -0.25,
 //  'x': -0.25,
- 'x': -0.25,
-}
+// }
 
 
 // DEGREES 2
