@@ -64,7 +64,7 @@ def convertToMonomialList(polynomial: str) -> list[Monomial]:
 	match = re.findall(regex, polynomial)
 	monomial_list = []
 	if match:
-		print(match)
+		# print(match)
 		rm_equal_polynomial = polynomial.replace('=', '')
 		rm_whitespace_polynomial = re.sub(r"\s", "", rm_equal_polynomial)
 		if len(rm_whitespace_polynomial) != len(re.sub(r"\s", "",''.join(match))):

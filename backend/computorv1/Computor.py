@@ -198,7 +198,7 @@ class Computor:
 			if self.solution['has_solution']:
 				self.solution.update({"irreducible": needToReduce(self.solution['x'])})
 				if needToReduce(self.solution['x']):
-					dict_nb = reduce_fraction(self.solution['a'], self.solution['b'])
+					dict_nb = reduce_fraction(self.solution['b'], self.solution['a'])
 					self.solution.update({"x_numerator": dict_nb['numerator']})
 					self.solution.update({"x_denominator": dict_nb['denominator']})
 
@@ -292,17 +292,17 @@ if __name__ == "__main__":
 	# try:
 		# computor = Computor("42X^2 = 42X^2") # deg 0 : true
 		# computor = Computor("1 = 0") # deg 0 : false
-		# computor = Computor("4x + 1 = 0") # deg 1 : true
+		computor = Computor("3x + 1 = 0") # deg 1 : true
 		# computor = Computor("0x + 1 = 0") # deg 1 : false
 		# computor = Computor("3x^2 - 5x + 2 = 0") # deg 2 : delta > 0
 		# computor = Computor("x^2 - 4x + 4 = 0") # deg 2 : delta = 0
 		# computor = Computor("x^2 + 2x + 5 = 0") # deg 2 : delta < 0
-		computor = Computor("+ 2x^2 + 5 = 0+ 2x + 7") # deg 2 : delta < 0
+		# computor = Computor("+ 2x^2 + 5 = 0+ 2x + 7") # deg 2 : delta < 0
 		# computor = Computor("4x^2 + 3x^1 + 1 * X^0 = 0 -6x")
 		# computor = Computor("3x^2 - 5x + 2 = 0")
 		# computor = Computor("5 * X^0 + 3 * X^1 + 3 * X^2 = 1 * X^0 + 0 * X^1")
 		from pprint import pprint
-		# pprint(computor.get_solution())
+		pprint(computor.get_solution())
 		# computor.display_solution(); exit(1)
 	# except Exception as error:
 	# 	print(f"Error: {error}")
