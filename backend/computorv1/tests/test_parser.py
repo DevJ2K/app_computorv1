@@ -20,6 +20,7 @@ def test_valid_equation():
 	assert is_an_equation("-3 = X^34 + 3*X") == True
 	assert is_an_equation("0.0 + 45*x^2 + 451*x = 0") == True
 	assert is_an_equation("	0.0    + 45	*	x^2 + 451	*   x = 	0") == True
+	assert is_an_equation("5 * X^0 + 3 * X^1 + 3 * X^2 = 1 * X^0 + 0 * X^1") == True
 
 def test_invalid_equation():
 	assert is_an_equation("3 4") == False

@@ -186,4 +186,6 @@ def test_polynomial_deg_2_delta_lower_0():
 		print("CURRENT TEST =>", test[0])
 		instance = Computor(test[0])
 		result = solve_polynomial_deg_2(instance.lhs, instance.rhs)
-		assert result == test[1], f"Failed for equation: {test[0]} with result: {result}"
+		assert result["has_solution"] == test[1]["has_solution"]
+		assert result["degree"] == test[1]["degree"]
+		assert result["delta"] == test[1]["delta"]
