@@ -64,7 +64,7 @@ def convertToMonomialList(polynomial: str) -> list[Monomial]:
 	match = re.findall(regex, polynomial)
 	monomial_list = []
 	if match:
-		# print(match)
+		print(match)
 		rm_equal_polynomial = polynomial.replace('=', '')
 		rm_whitespace_polynomial = re.sub(r"\s", "", rm_equal_polynomial)
 		if len(rm_whitespace_polynomial) != len(re.sub(r"\s", "",''.join(match))):
@@ -112,10 +112,10 @@ def needToReduce(number: float) -> bool:
 
 
 if (__name__ == "__main__"):
-	# print(convertToMonomialList("5 X^0"))
-	print(is_polynomial_form("5 5 5 5 = 0"))
-	print(is_polynomial_form("5 * XXXXXXXXXXXXxX^0 + 4 * X^1 - 9.3 * X^2 = 0"))
-	print(is_polynomial_form("X^3 + X^2 - X^1 = x^3"))
+	print(convertToMonomialList("0+ 2x + 7 "))
+	# print(is_polynomial_form("5 5 5 5 = 0"))
+	# print(is_polynomial_form("5 * XXXXXXXXXXXXxX^0 + 4 * X^1 - 9.3 * X^2 = 0"))
+	# print(is_polynomial_form("X^3 + X^2 - X^1 = x^3"))
 	# temp_list = convertToMonomialList("2 * X^2 - 2 * X^2 - 2 * X^2 + 4 * X^1 + 4 * X^1")
 	# print(temp_list)
 	# print(simplifiedPolynomialSide(temp_list))

@@ -117,6 +117,7 @@ def test_simplified_polynomial_side():
 	assert simplifiedPolynomialSide(convertToMonomialList("1 * X^2 - 2 * X^2 - 2 * X^2  + 4 * X^1")) == convertToMonomialList("-3 * X^2 + 4 * X^1")
 	assert simplifiedPolynomialSide(convertToMonomialList("2 * X^2 - 2 * X^2 + 4 * X^1")) == convertToMonomialList("4 * X^1")
 	assert simplifiedPolynomialSide(convertToMonomialList("X^3 + 2.5 * X^2 - 2 * X^2 + 4 * X^1")) == convertToMonomialList("X^3 + 0.5 * X^2 + 4 * X^1")
+	assert simplifiedPolynomialSide(convertToMonomialList("0+ 2x + 7")) == convertToMonomialList("7 * X^0 + 2 * X^1")
 
 # def test_convert_to_list():
 # 	assert convertToMonomialStrList("5 * X^0 + 4 * X^1 - 9.3 * X^2") == ['5*X^0', '+4*X^1 ', '-9.3*X^2']

@@ -33,4 +33,5 @@ def test_reduce_form_to_solve():
 
 	assert _C("3 * X^1 + 1 * X^0 = 2 * X^1 + 2 * X^0") == _C("1 * X^1 - 1 * X^0 = 0")
 	assert _C("X^3 + X^2 - X^1 = 0") == _C("X^3 + X^2 - 1 * X^1 = 0")
+	assert _C('0+ 2x + 7 = 0') == _C("2x + 7 = 0")
 
