@@ -48,6 +48,16 @@
       <transition name="fade">
         <div v-if="result" key="result" class="flex flex-col gap-8">
           <div>
+            <h2 class="text-high-contrast-text dark:text-d-high-contrast-text mb-2 text-2xl font-semibold">Steps
+            </h2>
+            <div class="border-accent-color dark:border-d-accent-color mb-1 rounded-md border-l-4 bg-gray-50 px-4 py-2 shadow-md dark:bg-gray-800" v-for="step in result.steps" v-bind:key="step">
+              <p class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
+                {{ step.message }}: <span
+                class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">{{ step.content }}</span>
+              </p>
+            </div>
+          </div>
+          <div>
             <h2 class="text-high-contrast-text dark:text-d-high-contrast-text mb-2 text-2xl font-semibold">Informations
             </h2>
             <div
@@ -207,14 +217,13 @@
             </div>
 
             <!-- Degree 2 with Δ -->
-            <div v-if="result.degree === 2"
+            <!-- <div v-if="result.degree === 2"
               class="border-accent-color dark:border-d-accent-color rounded-md border-l-4 bg-gray-50 p-4 shadow-md dark:bg-gray-800">
               <div v-if="result.has_solution && result.delta >= 0" class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
                 <p v-if="result.delta == 0">The equation has one solution. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ = 0</span></p>
                 <p v-else>The equation has two solutions. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ > 0</span></p>
               </div>
               <div v-else class="text-low-contrast-text dark:text-d-low-contrast-text text-lg">
-                <!--eslint-disable-next-line vue/no-parsing-error-->
                 <p>The equation has no real solutions. <span class="text-high-contrast-text dark:text-d-low-contrast-text font-bold">Δ < 0</span></p>
                 <div class="mt-4">
                   <div class="flex flex-row items-center gap-1">
@@ -302,11 +311,6 @@
 
 
                   </div>
-
-                  <!-- <div class="text-lg text-low-contrast-text dark:text-d-low-contrast-text">
-                    x<sub>1</sub> = {{ result.x1 }}<br />
-                    x<sub>2</sub> = {{ result.x2 }}
-                  </div> -->
                 </div>
                 <div v-else>
                   <div class="text-low-contrast-text dark:text-d-low-contrast-text flex flex-row items-center gap-1 text-lg">
@@ -322,7 +326,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Degree > 2 -->
             <div v-if="result.degree > 2"
